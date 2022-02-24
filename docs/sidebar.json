@@ -1,5 +1,6 @@
 {
-  "crono-maxrf": {
-    "Overview": "/"
+  "cronomaxrf": {
+    "Overview": "/",
+    "Exploring the Crono MA-XRF HDF5 file format ": "Exploring-the-Crono-MA-XRF-HDF5-file-format.html"
   }
 }
