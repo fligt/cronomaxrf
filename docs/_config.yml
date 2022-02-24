@@ -46,7 +46,6 @@ defaults:
       search: true
       sidebar: home_sidebar
       topnav: topnav
-      datatable: true
   -
     scope:
       path: ""
@@ -57,11 +56,9 @@ defaults:
       search: true
       tooltip: true
 
-sidebars:
-- home_sidebar
-    
-theme: jekyll-theme-cayman
-# fligt changed this: 
-#baseurl: /cronomaxrf/
-#into:
+sidebars: [home_sidebar]
 baseurl: /
+plugins:
+    - jekyll-remote-theme
+    
+remote_theme: fastai/nbdev-jekyll-theme
