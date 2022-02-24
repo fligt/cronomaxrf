@@ -1,4 +1,4 @@
-# Welcome to crono-maxrf 
+# Welcome to cronomaxrf 
 > An open source Python package for reading and converting the Crono MA-XRF HDF5 file format  
 
 
@@ -6,4 +6,4 @@ Recently my lab, the Rijkserfgoedlaboratorium in Amsterdam, acquired a new Bruke
 
 In order to make optimal use of the Crono data in collaborative research projects now and to make sure that we can still read the data in the future we need to: 1) understand the Crono HDF5 file format, and 2) develop open software tools available to all researchers for reading and converting these data files. 
 
-The `crono-maxrf` package is currently being developed under the GPLv3 open source software license. Our plan is to make it available for installation soon! If you can not wait for that, you can already follow our ideas real-time in this repository. 
+The `cronomaxrf` package is currently being developed under the GPLv3 open source software license. Our plan is to make it available for installation soon! If you can not wait for that, you can already follow our ideas real-time in this repository. 
