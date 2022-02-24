@@ -6,7 +6,7 @@ index = {"report": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"}
 
 modules = ["crono.py"]
 
-doc_url = "https://fligt.github.io/cronomaxrf/"
+doc_url = "https://fligt.github.io/"
 
 git_url = "https://github.com/fligt/cronomaxrf/tree/main/"
 
