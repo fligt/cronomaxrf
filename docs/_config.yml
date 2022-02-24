@@ -2,14 +2,14 @@ repository: fligt/cronomaxrf
 output: web
 topnav_title: cronomaxrf
 site_title: cronomaxrf
-company_name: Licensed under GPLv3
+company_name: Frank Ligterink
 description: Python package to read and convert the Crono MA-XRF HDF5 data file format
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
-#google_analytics:
+google_analytics:
 # See http://nbdev.fast.ai/search for help with adding Search
-#google_search:
+google_search:
 
 host: 127.0.0.1
 # the preview server used. Leave as is.
@@ -46,6 +46,7 @@ defaults:
       search: true
       sidebar: home_sidebar
       topnav: topnav
+      datatable: true
   -
     scope:
       path: ""
@@ -60,4 +61,7 @@ sidebars:
 - home_sidebar
     
 theme: jekyll-theme-cayman
+# fligt changed this: 
+#baseurl: /cronomaxrf/
+#into:
 baseurl: /cronomaxrf/
