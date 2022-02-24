@@ -1,15 +1,15 @@
-repository: fligt/crono-maxrf
+repository: fligt/cronomaxrf
 output: web
-topnav_title: crono-maxrf
-site_title: crono-maxrf
+topnav_title: cronomaxrf
+site_title: cronomaxrf
 company_name: Licensed under GPLv3
 description: Python package to read and convert the Crono MA-XRF HDF5 data file format
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
-google_analytics:
+#google_analytics:
 # See http://nbdev.fast.ai/search for help with adding Search
-google_search:
+#google_search:
 
 host: 127.0.0.1
 # the preview server used. Leave as is.
