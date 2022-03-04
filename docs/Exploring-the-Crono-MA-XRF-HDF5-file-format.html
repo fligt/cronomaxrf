@@ -43,6 +43,13 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://docs.h5py.org/en/stable/special.html#variable-length-strings">https://docs.h5py.org/en/stable/special.html#variable-length-strings</a></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -50,7 +57,7 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">report</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">report</span>
 </pre></div>
 
     </div>
@@ -68,8 +75,104 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
+</pre></div>
 
-<span class="n">report</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datasets</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;HDF5 dataset &#34;FinalSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;InitialSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;Settings&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;CreatedDateTime&#34;: shape (50,), type &#34;|S1&#34;&gt;,
+ &lt;HDF5 dataset &#34;CreatedWithSoftwareVersion&#34;: shape (50,), type &#34;|S1&#34;&gt;,
+ &lt;HDF5 dataset &#34;FileStructureVersion&#34;: shape (2,), type &#34;&lt;i4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Documentation&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;ImagePixelSizeRatio&#34;: shape (1, 2), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Static&#34;: shape (13358,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;StitchedImage&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;VideoStreams&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;CalibrationPoints&#34;: shape (2, 2), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;DPPStartTimestamp&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;Detected&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;EnergyVector&#34;: shape (4096,), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;LiveTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ComputedMaps&#34;: shape (85, 37, 27), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsPositions&#34;: shape (4284, 3), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsPositionsStats&#34;: shape (4284,), type &#34;|u1&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsTimestamps&#34;: shape (4284, 3), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;OutputCountRates&#34;: shape (4284,), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsEnergies&#34;: shape (27, 2), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsNames&#34;: shape (27,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsObjects&#34;: shape (27,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;RealTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ResetCounterValue&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Spectra&#34;: shape (4284, 4096), type &#34;&lt;u2&#34;&gt;,
+ &lt;HDF5 dataset &#34;SpectraIDs&#34;: shape (4284,), type &#34;&lt;u2&#34;&gt;,
+ &lt;HDF5 dataset &#34;SpectraSelectedIndex&#34;: shape (85, 37, 1), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;Timestamps&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;XComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;YComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">report</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -82,22 +185,20 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>--------------------------------------------------------------------------------
-CRONO FILE: 14200215102021-blindTest2AgedDetail.HDF5
+<pre>CONTENTS OF CRONO HDF5 FILE: &#39;14200215102021-blindTest2AgedDetail.HDF5&#39;
+(32 DATASETS)
 
-DATASETS: 
-
-[0*] /Configuration/FinalSystemStatus
-[1*] /Configuration/InitialSystemStatus
-[2*] /Configuration/Settings
+[0] /Configuration/FinalSystemStatus
+[1] /Configuration/InitialSystemStatus
+[2] /Configuration/Settings
 [3] /CreatedDateTime
 [4] /CreatedWithSoftwareVersion
 [5] /FileStructureVersion
-[6*] /Images/Documentation
+[6] /Images/Documentation
 [7] /Images/ImageAdjusting/ImagePixelSizeRatio
-[8*] /Images/Static
-[9*] /Images/StitchedImage
-[10*] /Images/VideoStreams
+[8] /Images/Static
+[9] /Images/StitchedImage
+[10] /Images/VideoStreams
 [11] /XRF/CalibrationPoints
 [12] /XRF/DPPStartTimestamp
 [13] /XRF/Detected
@@ -109,8 +210,8 @@ DATASETS:
 [19] /XRF/MotorsTimestamps
 [20] /XRF/OutputCountRates
 [21] /XRF/ROIs/ROIsEnergies
-[22*] /XRF/ROIs/ROIsNames
-[23*] /XRF/ROIs/ROIsObjects
+[22] /XRF/ROIs/ROIsNames
+[23] /XRF/ROIs/ROIsObjects
 [24] /XRF/RealTimes
 [25] /XRF/ResetCounterValue
 [26] /XRF/Spectra
@@ -121,646 +222,609 @@ DATASETS:
 [31] /XRF/YComputedMapsCoordinate
 
 --------------------------------------------------------------------------------
-CONTENT:
+[0] /Configuration/FinalSystemStatus
++ATTRIBUTES: 
+        - DateTime: 10/15/2021 14:27:31
+        - TubeTemperature: 57.33
 
-[0*] /Configuration/FinalSystemStatus
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(4311,)] SUB_DTYPE: &#39;|V1&#39;
 
-    DateTime: 10/15/2021 14:27:31
-      dtype=nested_array_of_characters
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version&#34;timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xecQ\xb8\x1e\xc5E\xb3@\x00\x00\x00\x00\x00*\xc7@\xc5\xea\x8f0\x0c\xd8\xe5?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc0\xed\x9e&lt;,\xd4\x88c\xc0\x00\x00\x00\x00\x00V\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x01\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff&#34;XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xec+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xca\xa7\x17\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
 
-    TubeTemperature: array([57.33], dtype=float32)
-      dtype=float32
 
-[1*] /Configuration/InitialSystemStatus
+--------------------------------------------------------------------------------
+[1] /Configuration/InitialSystemStatus
++ATTRIBUTES: 
+        - DateTime: 10/15/2021 14:20:06
+        - TubeTemperature: 57.33
 
-    DateTime: 10/15/2021 14:20:06
-      dtype=nested_array_of_characters
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(4311,)] SUB_DTYPE: &#39;|V1&#39;
 
-    TubeTemperature: array([57.33], dtype=float32)
-      dtype=float32
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version&#34;timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xa4p=\n\x97B\xb3@\x00\x00\x00\x00\x00\x1c\xc7@\xa4\xff\xe5Z\xb4\x00\x9d?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc04\x116&lt;\xbd\x9cc\xc0\x00\x00\x00\x00\x00\xd6\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff&#34;XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xea+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00=2\x11\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
 
-[2*] /Configuration/Settings
 
-    Acceleration: array([100.])
-      dtype=float64
+--------------------------------------------------------------------------------
+[2] /Configuration/Settings
++ATTRIBUTES: 
+        - Acceleration: 100.0
+        - Collimator: 0,5 mm
+        - Filter: No filter
+        - MapSetup: b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00GXGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00\x18XGLabMappingLib.MapSetup\x14\x00\x00\x00\x1bASCII_optionalFiles_enabled\x15folder_images_enabled\x13hdf5_images_enabled\x06folder\x05speed\x0cacceleration\nx_map_size\ny_map_size\x0cspectra_time\r_rowsDistance\nx_map_left\x0cy_map_bottom\x18origin_width_height_mode\x13required_pixel_size\rrequired_time\x16manual_resolution_mode\x0bguided_mode\x0eline_dead_time\rbinningFactor\x13NyquistMarginFactor\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x01\x01\x01\x06\x06\x0f\x0f\x0f\x06\x08\x08\x01\x0f\x0c\x01%XGLabMappingLib.MapSetup+guided_modes\x02\x00\x00\x00\x06\x06\x06\x02\x00\x00\x00\x00\x00\x01\x06\x03\x00\x00\x00}C:\\Users\\CRONO\\Documents\\Maps - HoeveBlauweKei\\LinkerSchuur\\Optional files - inkttesten\\14200215102021 - blindTest2AgedDetailH\xe1z\x14\xae\xc7+@\x00\x00\x00\x00\x00\x00Y@&amp;\x94\x00\x00\x07\xa6\x00\x00&lt;\x00\x00\x00\x00\x00\x00\x00\x00@\x7f@\x9c\x04\x02\x00\xc9\xb4\x01\x00\x00\xf4\x01\x00\x00\x00F\xc3#\x00\x00\x00\x00\x01\x05\xfc\xff\xff\xff%XGLabMappingLib.MapSetup+guided_modes\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00@333333\xf3?\x00\x00\x00\x00\x00\x00\xf0?\x0b&#39;
+        - SpectraTime: 60
+        - TubekV: 40
+        - TubemA: 250
+        - XSize: 37926
+        - XSpeed: 13.89
+        - XStart: 132252
+        - YSize: 42503
+        - YStart: 111817
+        - YStep: 500.0
+        - ZStart: 46018
 
-    Collimator: 0,5 mm
-      dtype=nested_array_of_characters
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(2778,)] SUB_DTYPE: &#39;|V1&#39;
 
-    Filter: No filter
-      dtype=nested_array_of_characters
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+Settings\t\x00\x00\x00\x0cdpp_settings\x10dpp_opt_settings\x10dpp_input_offset\x0cccd_settings\x0fmotors_settings\x0fxrf_calibration\x0fram_calibration\x0cxrf_controls\x1btube_material_atomic_number\x04\x04\x04\x04\x04\x04\x04\x04\x00\x1eXGLabHWLib.DPPLib+DPP_settings\x02\x00\x00\x00\&#39;XGLabHWLib.DPPLib+DPP_optional_settings\x02\x00\x00\x00*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x1eXGLabHWLib.CCDLib+CCD_settings\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorsSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00*XGLabHWLib.XGLabHWControl+ControlsSettings\x02\x00\x00\x00\x08\x02\x00\x00\x00\x05\xfd\xff\xff\xff\x1eXGLabHWLib.DPPLib+DPP_settings\x0b\x00\x00\x00\rdetection_thr\npileup_thr\x04gain\x0cpeaking_time\x08flat_top\x11edge_peaking_time\redge_flat_top\x13reset_recovery_time\x0einverted_input\x0ezero_peak_freq\x0bother_param\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0f\x08\x06\x0f\x0f\x0f\x0f\x0f\x01\x06\x0f\x02\x00\x00\x00#\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x08\x00\x00\x00\x07\x00\x00\x00\x07\x00\x00\x00\x01\x00\x00\x00\xe8\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x00\x00\x00\x00\x05\xfc\xff\xff\xff\&#39;XGLabHWLib.DPPLib+DPP_optional_settings\x07\x00\x00\x00\x06gain_2\x06gain_3\x0epeaking_time_2\x0epeaking_time_3\nflat_top_2\nflat_top_3\x06enable\x00\x00\x00\x00\x00\x00\x00\x06\x06\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xfb\xff\xff\xff*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x0boffset_val1\x0boffset_val2\x00\x00\x0f\x0f\x02\x00\x00\x00\x80\x00\x00\x00\x80\x00\x00\x00\x05\xfa\xff\xff\xff\x1eXGLabHWLib.CCDLib+CCD_settings\x04\x00\x00\x00\x08adc_gain\nadc_offset\x0fmax_power_laser\x0cpeltier_temp\x00\x00\x00\x00\x0b\x08\x0f\x08\x02\x00\x00\x00\x00\x00\x80?\n\x00\x00\x00,\x01\x00\x00\xf6\xff\xff\xff\x05\xf9\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorsSettings\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x02\x00\x00\x00\x05\xf8\xff\xff\xff)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x07enabled\rconfiguration\x00\x04\x01.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x02\x00\x00\x00\x02\x00\x00\x00\x01\x05\xf7\xff\xff\xff.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x0b\x00\x00\x00\ttype_name\x07address\x04axis\nisLockStep\x04type\x15microsteps_resolution\tmax_speed\x0cacceleration\x0bunits2steps\x06offset\x10maximum_position\x01\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x0f\x0f\x01%XGLabHWLib.MotorsLibClasses.MotorType\x02\x00\x00\x00\x08\x08\x08\x06\x08\x08\x02\x00\x00\x00\x06\n\x00\x00\x00\x16Standard Linear 600 mm\x03\x00\x00\x00\x01\x00\x00\x00\x00\x05\xf5\xff\xff\xff%XGLabHWLib.MotorsLibClasses.MotorType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00*\x95\n\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf4\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xf3\xff\xff\xff\xf7\xff\xff\xff\x06\x0e\x00\x00\x00\x16Standard Linear 450 mm\x01\x00\x00\x00\x01\x00\x00\x00\x01\x01\xf1\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf0\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xef\xff\xff\xff\xf7\xff\xff\xff\x06\x12\x00\x00\x00\x16Standard Linear 075 mm\x03\x00\x00\x00\x02\x00\x00\x00\x00\x01\xed\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff-XGLabHWLib.XGLabHWControl+CalibrationSettings\t\x00\x00\x00\x0ecalib_p1_count\x0fcalib_p1_energy\x0ecalib_p2_count\x0fcalib_p2_energy\x0ccalib_counts\x0ecalib_energies\x0ecalib_channels\ncalib_mode\x0ecalib_equation\x00\x00\x00\x00\x07\x07\x00\x00\x00\x0b\x0b\x0b\x0b\x0b\x0b\x08\x08\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x15\x00\x00\x00\t\x16\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe9\xff\xff\xff\xec\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x18\x00\x00\x00\t\x19\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xe6\xff\xff\xff*XGLabHWLib.XGLabHWControl+ControlsSettings\x05\x00\x00\x00&#34;limit_factor_single_spectra_enable\x1blimit_factor_mapping_enable\x12limit_factor_alert\x0climit_factor\x12tube_buzzer_enable\x00\x00\x00\x00\x00\x01\x01\x08\x06\x01\x02\x00\x00\x00\x00\x00\x02\x00\x00\x00333333\xc3?\x00-\x00\x00\x00\x0f\x15\x00\x00\x00\x02\x00\x00\x00\x0b\x00\xc0@D\x00\x00\xf4D\x0f\x16\x00\x00\x00\x02\x00\x00\x00\x0bj\xbc\x00A\xd3M\xb1A\x0f\x18\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x00zC\x00\x00\x0cD\x0f\x19\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x80\x8cC\x00\xe0\x87D\x0b&#39;&#39;
 
-    MapSetup: array([array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\xFF&#39;, b&#39;\xFF&#39;,
-              b&#39;\xFF&#39;, b&#39;\xFF&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0C&#39;, b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x47&#39;, b&#39;\x58&#39;, b&#39;\x47&#39;, b&#39;\x4C&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;,
-              b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x70&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x67&#39;,
-              b&#39;\x4C&#39;, b&#39;\x69&#39;, b&#39;\x62&#39;, b&#39;\x2C&#39;, b&#39;\x20&#39;, b&#39;\x56&#39;, b&#39;\x65&#39;,
-              b&#39;\x72&#39;, b&#39;\x73&#39;, b&#39;\x69&#39;, b&#39;\x6F&#39;, b&#39;\x6E&#39;, b&#39;\x3D&#39;, b&#39;\x31&#39;,
-              b&#39;\x2E&#39;, b&#39;\x32&#39;, b&#39;\x2E&#39;, b&#39;\x34&#39;, b&#39;\x2E&#39;, b&#39;\x34&#39;, b&#39;\x35&#39;,
-              b&#39;\x2C&#39;, b&#39;\x20&#39;, b&#39;\x43&#39;, b&#39;\x75&#39;, b&#39;\x6C&#39;, b&#39;\x74&#39;, b&#39;\x75&#39;,
-              b&#39;\x72&#39;, b&#39;\x65&#39;, b&#39;\x3D&#39;, b&#39;\x6E&#39;, b&#39;\x65&#39;, b&#39;\x75&#39;, b&#39;\x74&#39;,
-              b&#39;\x72&#39;, b&#39;\x61&#39;, b&#39;\x6C&#39;, b&#39;\x2C&#39;, b&#39;\x20&#39;, b&#39;\x50&#39;, b&#39;\x75&#39;,
-              b&#39;\x62&#39;, b&#39;\x6C&#39;, b&#39;\x69&#39;, b&#39;\x63&#39;, b&#39;\x4B&#39;, b&#39;\x65&#39;, b&#39;\x79&#39;,
-              b&#39;\x54&#39;, b&#39;\x6F&#39;, b&#39;\x6B&#39;, b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x3D&#39;, b&#39;\x6E&#39;,
-              b&#39;\x75&#39;, b&#39;\x6C&#39;, b&#39;\x6C&#39;, b&#39;\x05&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x18&#39;, b&#39;\x58&#39;, b&#39;\x47&#39;, b&#39;\x4C&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;,
-              b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x70&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x67&#39;,
-              b&#39;\x4C&#39;, b&#39;\x69&#39;, b&#39;\x62&#39;, b&#39;\x2E&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;,
-              b&#39;\x53&#39;, b&#39;\x65&#39;, b&#39;\x74&#39;, b&#39;\x75&#39;, b&#39;\x70&#39;, b&#39;\x14&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x1B&#39;, b&#39;\x41&#39;, b&#39;\x53&#39;, b&#39;\x43&#39;, b&#39;\x49&#39;,
-              b&#39;\x49&#39;, b&#39;\x5F&#39;, b&#39;\x6F&#39;, b&#39;\x70&#39;, b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6F&#39;,
-              b&#39;\x6E&#39;, b&#39;\x61&#39;, b&#39;\x6C&#39;, b&#39;\x46&#39;, b&#39;\x69&#39;, b&#39;\x6C&#39;, b&#39;\x65&#39;,
-              b&#39;\x73&#39;, b&#39;\x5F&#39;, b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;, b&#39;\x6C&#39;,
-              b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x15&#39;, b&#39;\x66&#39;, b&#39;\x6F&#39;, b&#39;\x6C&#39;, b&#39;\x64&#39;,
-              b&#39;\x65&#39;, b&#39;\x72&#39;, b&#39;\x5F&#39;, b&#39;\x69&#39;, b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x67&#39;,
-              b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x5F&#39;, b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;,
-              b&#39;\x6C&#39;, b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x13&#39;, b&#39;\x68&#39;, b&#39;\x64&#39;, b&#39;\x66&#39;,
-              b&#39;\x35&#39;, b&#39;\x5F&#39;, b&#39;\x69&#39;, b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x67&#39;, b&#39;\x65&#39;,
-              b&#39;\x73&#39;, b&#39;\x5F&#39;, b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;, b&#39;\x6C&#39;,
-              b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x06&#39;, b&#39;\x66&#39;, b&#39;\x6F&#39;, b&#39;\x6C&#39;, b&#39;\x64&#39;,
-              b&#39;\x65&#39;, b&#39;\x72&#39;, b&#39;\x05&#39;, b&#39;\x73&#39;, b&#39;\x70&#39;, b&#39;\x65&#39;, b&#39;\x65&#39;,
-              b&#39;\x64&#39;, b&#39;\x0C&#39;, b&#39;\x61&#39;, b&#39;\x63&#39;, b&#39;\x63&#39;, b&#39;\x65&#39;, b&#39;\x6C&#39;,
-              b&#39;\x65&#39;, b&#39;\x72&#39;, b&#39;\x61&#39;, b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6F&#39;, b&#39;\x6E&#39;,
-              b&#39;\x0A&#39;, b&#39;\x78&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x5F&#39;,
-              b&#39;\x73&#39;, b&#39;\x69&#39;, b&#39;\x7A&#39;, b&#39;\x65&#39;, b&#39;\x0A&#39;, b&#39;\x79&#39;, b&#39;\x5F&#39;,
-              b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x5F&#39;, b&#39;\x73&#39;, b&#39;\x69&#39;, b&#39;\x7A&#39;,
-              b&#39;\x65&#39;, b&#39;\x0C&#39;, b&#39;\x73&#39;, b&#39;\x70&#39;, b&#39;\x65&#39;, b&#39;\x63&#39;, b&#39;\x74&#39;,
-              b&#39;\x72&#39;, b&#39;\x61&#39;, b&#39;\x5F&#39;, b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6D&#39;, b&#39;\x65&#39;,
-              b&#39;\x0D&#39;, b&#39;\x5F&#39;, b&#39;\x72&#39;, b&#39;\x6F&#39;, b&#39;\x77&#39;, b&#39;\x73&#39;, b&#39;\x44&#39;,
-              b&#39;\x69&#39;, b&#39;\x73&#39;, b&#39;\x74&#39;, b&#39;\x61&#39;, b&#39;\x6E&#39;, b&#39;\x63&#39;, b&#39;\x65&#39;,
-              b&#39;\x0A&#39;, b&#39;\x78&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x5F&#39;,
-              b&#39;\x6C&#39;, b&#39;\x65&#39;, b&#39;\x66&#39;, b&#39;\x74&#39;, b&#39;\x0C&#39;, b&#39;\x79&#39;, b&#39;\x5F&#39;,
-              b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x5F&#39;, b&#39;\x62&#39;, b&#39;\x6F&#39;, b&#39;\x74&#39;,
-              b&#39;\x74&#39;, b&#39;\x6F&#39;, b&#39;\x6D&#39;, b&#39;\x18&#39;, b&#39;\x6F&#39;, b&#39;\x72&#39;, b&#39;\x69&#39;,
-              b&#39;\x67&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x5F&#39;, b&#39;\x77&#39;, b&#39;\x69&#39;, b&#39;\x64&#39;,
-              b&#39;\x74&#39;, b&#39;\x68&#39;, b&#39;\x5F&#39;, b&#39;\x68&#39;, b&#39;\x65&#39;, b&#39;\x69&#39;, b&#39;\x67&#39;,
-              b&#39;\x68&#39;, b&#39;\x74&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x6F&#39;, b&#39;\x64&#39;, b&#39;\x65&#39;,
-              b&#39;\x13&#39;, b&#39;\x72&#39;, b&#39;\x65&#39;, b&#39;\x71&#39;, b&#39;\x75&#39;, b&#39;\x69&#39;, b&#39;\x72&#39;,
-              b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x70&#39;, b&#39;\x69&#39;, b&#39;\x78&#39;, b&#39;\x65&#39;,
-              b&#39;\x6C&#39;, b&#39;\x5F&#39;, b&#39;\x73&#39;, b&#39;\x69&#39;, b&#39;\x7A&#39;, b&#39;\x65&#39;, b&#39;\x0D&#39;,
-              b&#39;\x72&#39;, b&#39;\x65&#39;, b&#39;\x71&#39;, b&#39;\x75&#39;, b&#39;\x69&#39;, b&#39;\x72&#39;, b&#39;\x65&#39;,
-              b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6D&#39;, b&#39;\x65&#39;, b&#39;\x16&#39;,
-              b&#39;\x6D&#39;, b&#39;\x61&#39;, b&#39;\x6E&#39;, b&#39;\x75&#39;, b&#39;\x61&#39;, b&#39;\x6C&#39;, b&#39;\x5F&#39;,
-              b&#39;\x72&#39;, b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x6F&#39;, b&#39;\x6C&#39;, b&#39;\x75&#39;, b&#39;\x74&#39;,
-              b&#39;\x69&#39;, b&#39;\x6F&#39;, b&#39;\x6E&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x6F&#39;, b&#39;\x64&#39;,
-              b&#39;\x65&#39;, b&#39;\x0B&#39;, b&#39;\x67&#39;, b&#39;\x75&#39;, b&#39;\x69&#39;, b&#39;\x64&#39;, b&#39;\x65&#39;,
-              b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x6F&#39;, b&#39;\x64&#39;, b&#39;\x65&#39;, b&#39;\x0E&#39;,
-              b&#39;\x6C&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x65&#39;, b&#39;\x5F&#39;, b&#39;\x64&#39;, b&#39;\x65&#39;,
-              b&#39;\x61&#39;, b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6D&#39;, b&#39;\x65&#39;,
-              b&#39;\x0D&#39;, b&#39;\x62&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x6E&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;,
-              b&#39;\x67&#39;, b&#39;\x46&#39;, b&#39;\x61&#39;, b&#39;\x63&#39;, b&#39;\x74&#39;, b&#39;\x6F&#39;, b&#39;\x72&#39;,
-              b&#39;\x13&#39;, b&#39;\x4E&#39;, b&#39;\x79&#39;, b&#39;\x71&#39;, b&#39;\x75&#39;, b&#39;\x69&#39;, b&#39;\x73&#39;,
-              b&#39;\x74&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x72&#39;, b&#39;\x67&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;,
-              b&#39;\x46&#39;, b&#39;\x61&#39;, b&#39;\x63&#39;, b&#39;\x74&#39;, b&#39;\x6F&#39;, b&#39;\x72&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x04&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x01&#39;,
-              b&#39;\x01&#39;, b&#39;\x06&#39;, b&#39;\x06&#39;, b&#39;\x0F&#39;, b&#39;\x0F&#39;, b&#39;\x0F&#39;, b&#39;\x06&#39;,
-              b&#39;\x08&#39;, b&#39;\x08&#39;, b&#39;\x01&#39;, b&#39;\x0F&#39;, b&#39;\x0C&#39;, b&#39;\x01&#39;, b&#39;\x25&#39;,
-              b&#39;\x58&#39;, b&#39;\x47&#39;, b&#39;\x4C&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;,
-              b&#39;\x70&#39;, b&#39;\x70&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x67&#39;, b&#39;\x4C&#39;, b&#39;\x69&#39;,
-              b&#39;\x62&#39;, b&#39;\x2E&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x53&#39;, b&#39;\x65&#39;,
-              b&#39;\x74&#39;, b&#39;\x75&#39;, b&#39;\x70&#39;, b&#39;\x2B&#39;, b&#39;\x67&#39;, b&#39;\x75&#39;, b&#39;\x69&#39;,
-              b&#39;\x64&#39;, b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x6F&#39;, b&#39;\x64&#39;,
-              b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x06&#39;,
-              b&#39;\x06&#39;, b&#39;\x06&#39;, b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x06&#39;, b&#39;\x03&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x7D&#39;, b&#39;\x43&#39;, b&#39;\x3A&#39;, b&#39;\x5C&#39;, b&#39;\x55&#39;, b&#39;\x73&#39;, b&#39;\x65&#39;,
-              b&#39;\x72&#39;, b&#39;\x73&#39;, b&#39;\x5C&#39;, b&#39;\x43&#39;, b&#39;\x52&#39;, b&#39;\x4F&#39;, b&#39;\x4E&#39;,
-              b&#39;\x4F&#39;, b&#39;\x5C&#39;, b&#39;\x44&#39;, b&#39;\x6F&#39;, b&#39;\x63&#39;, b&#39;\x75&#39;, b&#39;\x6D&#39;,
-              b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x74&#39;, b&#39;\x73&#39;, b&#39;\x5C&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;,
-              b&#39;\x70&#39;, b&#39;\x73&#39;, b&#39;\x20&#39;, b&#39;\x2D&#39;, b&#39;\x20&#39;, b&#39;\x48&#39;, b&#39;\x6F&#39;,
-              b&#39;\x65&#39;, b&#39;\x76&#39;, b&#39;\x65&#39;, b&#39;\x42&#39;, b&#39;\x6C&#39;, b&#39;\x61&#39;, b&#39;\x75&#39;,
-              b&#39;\x77&#39;, b&#39;\x65&#39;, b&#39;\x4B&#39;, b&#39;\x65&#39;, b&#39;\x69&#39;, b&#39;\x5C&#39;, b&#39;\x4C&#39;,
-              b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x6B&#39;, b&#39;\x65&#39;, b&#39;\x72&#39;, b&#39;\x53&#39;, b&#39;\x63&#39;,
-              b&#39;\x68&#39;, b&#39;\x75&#39;, b&#39;\x75&#39;, b&#39;\x72&#39;, b&#39;\x5C&#39;, b&#39;\x4F&#39;, b&#39;\x70&#39;,
-              b&#39;\x74&#39;, b&#39;\x69&#39;, b&#39;\x6F&#39;, b&#39;\x6E&#39;, b&#39;\x61&#39;, b&#39;\x6C&#39;, b&#39;\x20&#39;,
-              b&#39;\x66&#39;, b&#39;\x69&#39;, b&#39;\x6C&#39;, b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x20&#39;, b&#39;\x2D&#39;,
-              b&#39;\x20&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x6B&#39;, b&#39;\x74&#39;, b&#39;\x74&#39;, b&#39;\x65&#39;,
-              b&#39;\x73&#39;, b&#39;\x74&#39;, b&#39;\x65&#39;, b&#39;\x6E&#39;, b&#39;\x5C&#39;, b&#39;\x31&#39;, b&#39;\x34&#39;,
-              b&#39;\x32&#39;, b&#39;\x30&#39;, b&#39;\x30&#39;, b&#39;\x32&#39;, b&#39;\x31&#39;, b&#39;\x35&#39;, b&#39;\x31&#39;,
-              b&#39;\x30&#39;, b&#39;\x32&#39;, b&#39;\x30&#39;, b&#39;\x32&#39;, b&#39;\x31&#39;, b&#39;\x20&#39;, b&#39;\x2D&#39;,
-              b&#39;\x20&#39;, b&#39;\x62&#39;, b&#39;\x6C&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x64&#39;, b&#39;\x54&#39;,
-              b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x74&#39;, b&#39;\x32&#39;, b&#39;\x41&#39;, b&#39;\x67&#39;, b&#39;\x65&#39;,
-              b&#39;\x64&#39;, b&#39;\x44&#39;, b&#39;\x65&#39;, b&#39;\x74&#39;, b&#39;\x61&#39;, b&#39;\x69&#39;, b&#39;\x6C&#39;,
-              b&#39;\x48&#39;, b&#39;\xE1&#39;, b&#39;\x7A&#39;, b&#39;\x14&#39;, b&#39;\xAE&#39;, b&#39;\xC7&#39;, b&#39;\x2B&#39;,
-              b&#39;\x40&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x59&#39;, b&#39;\x40&#39;, b&#39;\x26&#39;, b&#39;\x94&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x07&#39;,
-              b&#39;\xA6&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x3C&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x40&#39;, b&#39;\x7F&#39;,
-              b&#39;\x40&#39;, b&#39;\x9C&#39;, b&#39;\x04&#39;, b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\xC9&#39;, b&#39;\xB4&#39;,
-              b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\xF4&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x46&#39;, b&#39;\xC3&#39;, b&#39;\x23&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x05&#39;, b&#39;\xFC&#39;, b&#39;\xFF&#39;, b&#39;\xFF&#39;, b&#39;\xFF&#39;,
-              b&#39;\x25&#39;, b&#39;\x58&#39;, b&#39;\x47&#39;, b&#39;\x4C&#39;, b&#39;\x61&#39;, b&#39;\x62&#39;, b&#39;\x4D&#39;,
-              b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x70&#39;, b&#39;\x69&#39;, b&#39;\x6E&#39;, b&#39;\x67&#39;, b&#39;\x4C&#39;,
-              b&#39;\x69&#39;, b&#39;\x62&#39;, b&#39;\x2E&#39;, b&#39;\x4D&#39;, b&#39;\x61&#39;, b&#39;\x70&#39;, b&#39;\x53&#39;,
-              b&#39;\x65&#39;, b&#39;\x74&#39;, b&#39;\x75&#39;, b&#39;\x70&#39;, b&#39;\x2B&#39;, b&#39;\x67&#39;, b&#39;\x75&#39;,
-              b&#39;\x69&#39;, b&#39;\x64&#39;, b&#39;\x65&#39;, b&#39;\x64&#39;, b&#39;\x5F&#39;, b&#39;\x6D&#39;, b&#39;\x6F&#39;,
-              b&#39;\x64&#39;, b&#39;\x65&#39;, b&#39;\x73&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x07&#39;, b&#39;\x76&#39;, b&#39;\x61&#39;, b&#39;\x6C&#39;, b&#39;\x75&#39;, b&#39;\x65&#39;, b&#39;\x5F&#39;,
-              b&#39;\x5F&#39;, b&#39;\x00&#39;, b&#39;\x08&#39;, b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x02&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x40&#39;, b&#39;\x33&#39;, b&#39;\x33&#39;,
-              b&#39;\x33&#39;, b&#39;\x33&#39;, b&#39;\x33&#39;, b&#39;\x33&#39;, b&#39;\xF3&#39;, b&#39;\x3F&#39;, b&#39;\x00&#39;,
-              b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\xF0&#39;, b&#39;\x3F&#39;,
-              b&#39;\x0B&#39;], dtype=&#39;|V1&#39;)                                        ],
-      dtype=object)
-      dtype=object
 
-    SpectraTime: array([60], dtype=uint32)
-      dtype=uint32
-
-    TubekV: array([40], dtype=int32)
-      dtype=int32
-
-    TubemA: array([250], dtype=int32)
-      dtype=int32
-
-    XSize: array([37926], dtype=uint32)
-      dtype=uint32
-
-    XSpeed: array([13.89])
-      dtype=float64
-
-    XStart: array([132252], dtype=uint64)
-      dtype=uint64
-
-    YSize: array([42503], dtype=uint32)
-      dtype=uint32
-
-    YStart: array([111817], dtype=uint64)
-      dtype=uint64
-
-    YStep: array([500.])
-      dtype=float64
-
-    ZStart: array([46018], dtype=uint64)
-      dtype=uint64
-
+--------------------------------------------------------------------------------
 [3] /CreatedDateTime
++ATTRIBUTES: (none)
 
-     array([b&#39;1&#39;, b&#39;0&#39;, b&#39;/&#39;, b&#39;1&#39;, b&#39;5&#39;, b&#39;/&#39;, b&#39;2&#39;, b&#39;0&#39;, b&#39;2&#39;, b&#39;1&#39;, b&#39; &#39;,
-       b&#39;1&#39;, b&#39;4&#39;, b&#39;:&#39;, b&#39;2&#39;, b&#39;0&#39;, b&#39;:&#39;, b&#39;0&#39;, b&#39;2&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;,
-       b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;,
-       b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;,
-       b&#39;&#39;], dtype=&#39;|S1&#39;)
++SHAPE: (50,) DTYPE: &#39;|S1&#39;
 
++VALUES: 
+&#39;10/15/2021 14:20:02&#39;
+
+
+--------------------------------------------------------------------------------
 [4] /CreatedWithSoftwareVersion
++ATTRIBUTES: (none)
 
-     array([b&#39;C&#39;, b&#39;R&#39;, b&#39;O&#39;, b&#39;N&#39;, b&#39;O&#39;, b&#39; &#39;, b&#39;1&#39;, b&#39;.&#39;, b&#39;2&#39;, b&#39;.&#39;, b&#39;4&#39;,
-       b&#39;.&#39;, b&#39;5&#39;, b&#39;4&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;,
-       b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;,
-       b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;, b&#39;&#39;],
-      dtype=&#39;|S1&#39;)
++SHAPE: (50,) DTYPE: &#39;|S1&#39;
 
++VALUES: 
+&#39;CRONO 1.2.4.54&#39;
+
+
+--------------------------------------------------------------------------------
 [5] /FileStructureVersion
++ATTRIBUTES: (none)
 
-     array([1, 6], dtype=int32)
++SHAPE: (2,) DTYPE: &#39;int32&#39;
 
-[6*] /Images/Documentation
++VALUES: 
+&#39;[1 6]&#39;
 
-     array([array([], dtype=&#39;|V1&#39;)], dtype=object)
 
+--------------------------------------------------------------------------------
+[6] /Images/Documentation
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
+
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+
+--------------------------------------------------------------------------------
 [7] /Images/ImageAdjusting/ImagePixelSizeRatio
++ATTRIBUTES: (none)
 
-     array([[11.085714, 11.085714]], dtype=float32)
++SHAPE: (1, 2) DTYPE: &#39;float32&#39;
 
-[8*] /Images/Static
++VALUES: 
+&#39;[[11.085714 11.085714]]&#39;
 
-     array([array([], dtype=&#39;|V1&#39;),
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\xFF&#39;, b&#39;\xD9&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\xFF&#39;, b&#39;\xD9&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       ...,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\xFF&#39;, b&#39;\xD9&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\xFF&#39;, b&#39;\xD9&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\xFF&#39;, b&#39;\xD9&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ],
-      dtype=object)
 
-[9*] /Images/StitchedImage
+--------------------------------------------------------------------------------
+[8] /Images/Static
++ATTRIBUTES: (none)
 
-     array([array([], dtype=&#39;|V1&#39;)], dtype=object)
++SHAPE: (13358,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,), (2565,), (2572,), (2525,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
 
-[10*] /Images/VideoStreams
++VALUES: 
+&#39;b&#39;&#39;&#39;
 
-     array([array([], dtype=&#39;|V1&#39;)], dtype=object)
 
+--------------------------------------------------------------------------------
+[9] /Images/StitchedImage
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
+
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+
+--------------------------------------------------------------------------------
+[10] /Images/VideoStreams
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
+
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+
+--------------------------------------------------------------------------------
 [11] /XRF/CalibrationPoints
++ATTRIBUTES: 
+        - CalibrationBins: 4096
+        - CalibrationEquation: 0
 
-    CalibrationBins: array([4096], dtype=uint32)
-      dtype=uint32
++SHAPE: (2, 2) DTYPE: &#39;float32&#39;
 
-    CalibrationEquation: array([0], dtype=uint32)
-      dtype=uint32
++VALUES: 
+&#39;[[ 771.       8.046]
+ [1952.      22.163]]&#39;
 
+
+--------------------------------------------------------------------------------
 [12] /XRF/DPPStartTimestamp
++ATTRIBUTES: (none)
 
-     array([125903380430, 125903380430, 125903380430, ..., 125903380430,
-       125903380430, 125903380430], dtype=uint64)
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
++VALUES: 
+&#39;[125903380430 125903380430 125903380430 ... 125903380430 125903380430
+ 125903380430]&#39;
+
+
+--------------------------------------------------------------------------------
 [13] /XRF/Detected
++ATTRIBUTES: (none)
 
-     array([515, 578, 567, ..., 635, 603, 622], dtype=uint32)
++SHAPE: (4284,) DTYPE: &#39;uint32&#39;
 
++VALUES: 
+&#39;[515 578 567 ... 635 603 622]&#39;
+
+
+--------------------------------------------------------------------------------
 [14] /XRF/EnergyVector
++ATTRIBUTES: (none)
 
-     array([-1.1700948, -1.1581414, -1.146188 , ..., 47.755295 , 47.767246 ,
-       47.7792   ], dtype=float32)
++SHAPE: (4096,) DTYPE: &#39;float32&#39;
 
++VALUES: 
+&#39;[-1.1700948 -1.1581414 -1.146188  ... 47.755295  47.767246  47.7792   ]&#39;
+
+
+--------------------------------------------------------------------------------
 [15] /XRF/LiveTimes
++ATTRIBUTES: (none)
 
-     array([59436, 59356, 59368, ..., 59300, 59336, 59316], dtype=uint64)
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
++VALUES: 
+&#39;[59436 59356 59368 ... 59300 59336 59316]&#39;
+
+
+--------------------------------------------------------------------------------
 [16] /XRF/Maps/ComputedMaps
++ATTRIBUTES: (none)
 
-     array([[[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]],
++SHAPE: (85, 37, 27) DTYPE: &#39;float64&#39;
 
-       [[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]],
++VALUES: 
+&#39;[[[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
 
-       [[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]],
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
 
-       ...,
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
 
-       [[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]],
+ ...
 
-       [[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]],
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
 
-       [[nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        ...,
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]]])
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
 
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]]&#39;
+
+
+--------------------------------------------------------------------------------
 [17] /XRF/MotorsPositions
++ATTRIBUTES: (none)
 
-     array([[132252, 111816,  46018],
-       [132252, 111816,  46018],
-       [132273, 111816,  46018],
-       ...,
-       [169155, 153817,  46018],
-       [169832, 153817,  46018],
-       [170151, 153817,  46018]], dtype=uint32)
++SHAPE: (4284, 3) DTYPE: &#39;uint32&#39;
 
++VALUES: 
+&#39;[[132252 111816  46018]
+ [132252 111816  46018]
+ [132273 111816  46018]
+ ...
+ [169155 153817  46018]
+ [169832 153817  46018]
+ [170151 153817  46018]]&#39;
+
+
+--------------------------------------------------------------------------------
 [18] /XRF/MotorsPositionsStats
++ATTRIBUTES: (none)
 
-     array([1, 1, 1, ..., 1, 1, 1], dtype=uint8)
++SHAPE: (4284,) DTYPE: &#39;uint8&#39;
 
++VALUES: 
+&#39;[1 1 1 ... 1 1 1]&#39;
+
+
+--------------------------------------------------------------------------------
 [19] /XRF/MotorsTimestamps
++ATTRIBUTES: (none)
 
-     array([[ 8479, 11082, 13794],
-       [ 8479, 11082, 13794],
-       [ 8480, 11079, 13791],
-       ...,
-       [ 8597, 11195, 13809],
-       [ 8594, 11195, 13809],
-       [ 8596, 11199, 13810]], dtype=uint64)
++SHAPE: (4284, 3) DTYPE: &#39;uint64&#39;
 
++VALUES: 
+&#39;[[ 8479 11082 13794]
+ [ 8479 11082 13794]
+ [ 8480 11079 13791]
+ ...
+ [ 8597 11195 13809]
+ [ 8594 11195 13809]
+ [ 8596 11199 13810]]&#39;
+
+
+--------------------------------------------------------------------------------
 [20] /XRF/OutputCountRates
++ATTRIBUTES: (none)
 
-     array([ 9.38333333, 10.31666667, 10.15      , ..., 11.25      ,
-       10.76666667, 11.11666667])
++SHAPE: (4284,) DTYPE: &#39;float64&#39;
 
++VALUES: 
+&#39;[ 9.38333333 10.31666667 10.15       ... 11.25       10.76666667
+ 11.11666667]&#39;
+
+
+--------------------------------------------------------------------------------
 [21] /XRF/ROIs/ROIsEnergies
++ATTRIBUTES: (none)
 
-     array([[ 1.6389612 ,  1.88998318],
-       [ 2.18881893,  2.39202714],
-       [ 3.51564956,  3.85034561],
-       [ 4.29262257,  4.65122557],
-       [ 5.05764198,  5.30866432],
-       [ 5.30866432,  5.61945343],
-       [ 5.69117403,  6.04977655],
-       [ 6.16931105,  6.611588  ],
-       [ 6.77893591,  7.24511957],
-       [ 7.54920769,  7.54920769],
-       [ 8.36874199,  8.87078571],
-       [10.35301113, 10.81919479],
-       [12.4209547 , 12.86323166],
-       [13.90318012, 14.45303822],
-       [18.20641518, 19.48980331],
-       [ 3.1809535 ,  3.4678359 ],
-       [11.7412138 , 12.09821224],
-       [ 9.80000019, 10.10000038],
-       [11.01045036, 11.46468067],
-       [22.85629845, 23.54959869],
-       [16.92739868, 17.57288361],
-       [14.58452606, 14.95508194],
-       [19.83208084, 20.5731945 ],
-       [ 1.86607635,  2.12905169],
-       [ 7.31684017,  7.65153646],
-       [ 8.9664135 ,  9.43259716],
-       [24.81232262, 25.71306229]])
++SHAPE: (27, 2) DTYPE: &#39;float64&#39;
 
-[22*] /XRF/ROIs/ROIsNames
++VALUES: 
+&#39;[[ 1.6389612   1.88998318]
+ [ 2.18881893  2.39202714]
+ [ 3.51564956  3.85034561]
+ [ 4.29262257  4.65122557]
+ [ 5.05764198  5.30866432]
+ [ 5.30866432  5.61945343]
+ [ 5.69117403  6.04977655]
+ [ 6.16931105  6.611588  ]
+ [ 6.77893591  7.24511957]
+ [ 7.54920769  7.54920769]
+ [ 8.36874199  8.87078571]
+ [10.35301113 10.81919479]
+ [12.4209547  12.86323166]
+ [13.90318012 14.45303822]
+ [18.20641518 19.48980331]
+ [ 3.1809535   3.4678359 ]
+ [11.7412138  12.09821224]
+ [ 9.80000019 10.10000038]
+ [11.01045036 11.46468067]
+ [22.85629845 23.54959869]
+ [16.92739868 17.57288361]
+ [14.58452606 14.95508194]
+ [19.83208084 20.5731945 ]
+ [ 1.86607635  2.12905169]
+ [ 7.31684017  7.65153646]
+ [ 8.9664135   9.43259716]
+ [24.81232262 25.71306229]]&#39;
 
-     array([array([b&#39;S&#39;, b&#39;i&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;S&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;C&#39;, b&#39;a&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;T&#39;, b&#39;i&#39;, b&#39;K&#39;, b&#39;a&#39;, b&#39;B&#39;, b&#39;a&#39;, b&#39;L&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;B&#39;, b&#39;a&#39;, b&#39;L&#39;, b&#39;g&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;C&#39;, b&#39;r&#39;, b&#39;K&#39;, b&#39;a&#39;, b&#39;B&#39;, b&#39;a&#39;, b&#39;L&#39;, b&#39;l&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;M&#39;, b&#39;n&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;F&#39;, b&#39;e&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;F&#39;, b&#39;e&#39;, b&#39;K&#39;, b&#39;b&#39;, b&#39;C&#39;, b&#39;o&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;C&#39;, b&#39;u&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;Z&#39;, b&#39;n&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;P&#39;, b&#39;b&#39;, b&#39;L&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;P&#39;, b&#39;b&#39;, b&#39;L&#39;, b&#39;b&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;S&#39;, b&#39;r&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;C&#39;, b&#39;o&#39;, b&#39;m&#39;, b&#39;p&#39;, b&#39;t&#39;, b&#39;o&#39;, b&#39;n&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;K&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;A&#39;, b&#39;s&#39;, b&#39;K&#39;, b&#39;b&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;H&#39;, b&#39;g&#39;, b&#39;L&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;S&#39;, b&#39;e&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;C&#39;, b&#39;d&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;N&#39;, b&#39;e&#39;, b&#39;w&#39;, b&#39; &#39;, b&#39;R&#39;, b&#39;O&#39;, b&#39;I&#39;, b&#39; &#39;, b&#39;(&#39;, b&#39;1&#39;, b&#39;)&#39;],
-             dtype=&#39;|S1&#39;)                                                       ,
-       array([b&#39;N&#39;, b&#39;e&#39;, b&#39;w&#39;, b&#39; &#39;, b&#39;R&#39;, b&#39;O&#39;, b&#39;I&#39;, b&#39; &#39;, b&#39;(&#39;, b&#39;2&#39;, b&#39;)&#39;],
-             dtype=&#39;|S1&#39;)                                                       ,
-       array([b&#39;R&#39;, b&#39;h&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;P&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;N&#39;, b&#39;i&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;),
-       array([b&#39;N&#39;, b&#39;e&#39;, b&#39;w&#39;, b&#39; &#39;, b&#39;R&#39;, b&#39;O&#39;, b&#39;I&#39;, b&#39; &#39;, b&#39;(&#39;, b&#39;3&#39;, b&#39;)&#39;],
-             dtype=&#39;|S1&#39;)                                                       ,
-       array([b&#39;S&#39;, b&#39;n&#39;, b&#39;K&#39;, b&#39;a&#39;], dtype=&#39;|S1&#39;)], dtype=object)
 
-[23*] /XRF/ROIs/ROIsObjects
+--------------------------------------------------------------------------------
+[22] /XRF/ROIs/ROIsNames
++ATTRIBUTES: (none)
 
-     array([array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ,
-       array([b&#39;\x00&#39;, b&#39;\x01&#39;, b&#39;\x00&#39;, ..., b&#39;\x00&#39;, b&#39;\x00&#39;, b&#39;\x0B&#39;],
-             dtype=&#39;|V1&#39;)                                                ],
-      dtype=object)
++SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(4,), (3,), (4,), (8,), &#39;....&#39;] SUB_DTYPE: &#39;|S1&#39;
 
++VALUES: 
+&#39;SiKa
+SKa
+CaKa
+TiKaBaLa
+BaLg
+CrKaBaLl
+MnKa
+FeKa
+FeKbCoKa
+CuKa
+ZnKa
+PbLa
+PbLb
+SrKa
+Compton
+KKa
+AsKb
+HgLa
+SeKa
+CdKa
+New ROI (1)
+New ROI (2)
+RhKa
+PKa
+NiKa
+New ROI (3)
+SnKa&#39;
+
+
+--------------------------------------------------------------------------------
+[23] /XRF/ROIs/ROIsObjects
++ATTRIBUTES: (none)
+
++SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(2138,), (2136,), (2138,), (2142,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
+
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00GXGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00$XGLabMappingLib.ObservableROIWrapper\x01\x00\x00\x00\x04_roi\x04\x13XGLabMappingLib.ROI\x02\x00\x00\x00\x02\x00\x00\x00\t\x03\x00\x00\x00\x05\x03\x00\x00\x00\x13XGLabMappingLib.ROI\x08\x00\x00\x00\x15&lt;name&gt;k__BackingField\x18&lt;element&gt;k__BackingField\x1b&lt;definition&gt;k__BackingField\x15&lt;type&gt;k__BackingField\x16&lt;start&gt;k__BackingField\x14&lt;end&gt;k__BackingField\x18&lt;palette&gt;k__BackingField\x19&lt;editable&gt;k__BackingField\x01\x01\x04\x04\x00\x00\x04\x00\x1dXGLabMappingLib.ROIDefinition\x02\x00\x00\x00\x1fXGLabMappingLib.ROIAnalysisType\x02\x00\x00\x00\x05\x05\x17XGLabMappingLib.Palette\x02\x00\x00\x00\x01\x02\x00\x00\x00\x06\x04\x00\x00\x00\x04SiKa\x06\x05\x00\x00\x00\x00\x05\xfa\xff\xff\xff\x1dXGLabMappingLib.ROIDefinition\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf9\xff\xff\xff\x1fXGLabMappingLib.ROIAnalysisType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x101.63896119594574\x101.88998317718506\t\x08\x00\x00\x00\x01\x05\x08\x00\x00\x00\x17XGLabMappingLib.Palette\x03\x00\x00\x00\x0b_colorSteps\x1b&lt;autoMaxMin&gt;k__BackingField\x17&lt;smooth&gt;k__BackingField\x04\x00\x00\x1cXGLabMappingLib.PaletteSteps\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\t\t\x00\x00\x00\x01\x01\x05\t\x00\x00\x00\x1cXGLabMappingLib.PaletteSteps\x01\x00\x00\x00\x06_steps\x03\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x02\x00\x00\x00\t\n\x00\x00\x00\x04\n\x00\x00\x00\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x03\x00\x00\x00\x06_items\x05_size\x08_version\x04\x00\x00\x1dXGLabMappingLib.PaletteStep[]\x02\x00\x00\x00\x08\x08\t\x0b\x00\x00\x00\t\x00\x00\x00\t\x00\x00\x00\x07\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x10\x00\x00\x00\x04\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x0c\r\x00\x00\x00QSystem.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\x05\xf4\xff\xff\xff\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x05value\x05color\x00\x04\x06\x14System.Drawing.Color\r\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf2\xff\xff\xff\x14System.Drawing.Color\x04\x00\x00\x00\x04name\x05value\nknownColor\x05state\x01\x00\x00\x00\t\x07\x07\r\x00\x00\x00\n@\x00@\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xf1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@o@\x01\xf0\xff\xff\xff\xf2\xff\xff\xff\n\x80\x00\x80\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xef\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x7f@\x01\xee\xff\xff\xff\xf2\xff\xff\xff\n\xeeh{\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xed\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x87@\x01\xec\xff\xff\xff\xf2\xff\xff\xff\n\xed\x95d\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xeb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x8f@\x01\xea\xff\xff\xff\xf2\xff\xff\xff\n2\xcd2\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x88\x93@\x01\xe8\xff\xff\xff\xf2\xff\xff\xff\n\x90\xee\x90\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x97@\x01\xe6\xff\xff\xff\xf2\xff\xff\xff\n\x00\xff\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00X\x9b@\x01\xe4\xff\xff\xff\xf2\xff\xff\xff\n\x00\xa5\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe3\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x9f@\x01\xe2\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe0\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdf\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xde\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdd\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdc\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xda\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd8\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd6\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd4\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
+
+
+--------------------------------------------------------------------------------
 [24] /XRF/RealTimes
++ATTRIBUTES: (none)
 
-     array([60000, 60000, 60000, ..., 60000, 60000, 60000], dtype=uint64)
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
++VALUES: 
+&#39;[60000 60000 60000 ... 60000 60000 60000]&#39;
+
+
+--------------------------------------------------------------------------------
 [25] /XRF/ResetCounterValue
++ATTRIBUTES: (none)
 
-     array([ 9, 11, 11, ..., 11, 11, 11], dtype=uint32)
++SHAPE: (4284,) DTYPE: &#39;uint32&#39;
 
++VALUES: 
+&#39;[ 9 11 11 ... 11 11 11]&#39;
+
+
+--------------------------------------------------------------------------------
 [26] /XRF/Spectra
++ATTRIBUTES: (none)
 
-     array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0]], dtype=uint16)
++SHAPE: (4284, 4096) DTYPE: &#39;uint16&#39;
 
++VALUES: 
+&#39;[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]&#39;
+
+
+--------------------------------------------------------------------------------
 [27] /XRF/SpectraIDs
++ATTRIBUTES: (none)
 
-     array([20518, 20519, 20520, ..., 27568, 27569, 27570], dtype=uint16)
++SHAPE: (4284,) DTYPE: &#39;uint16&#39;
 
++VALUES: 
+&#39;[20518 20519 20520 ... 27568 27569 27570]&#39;
+
+
+--------------------------------------------------------------------------------
 [28] /XRF/SpectraSelectedIndex
++ATTRIBUTES: (none)
 
-     array([[[   4],
-        [   5],
-        [   6],
-        ...,
-        [  44],
-        [  45],
-        [  47]],
++SHAPE: (85, 37, 1) DTYPE: &#39;uint64&#39;
 
-       [[  97],
-        [  96],
-        [  95],
-        ...,
-        [  56],
-        [  55],
-        [  54]],
++VALUES: 
+&#39;[[[   4]
+  [   5]
+  [   6]
+  ...
+  [  44]
+  [  45]
+  [  47]]
 
-       [[ 104],
-        [ 106],
-        [ 107],
-        ...,
-        [ 145],
-        [ 146],
-        [ 147]],
+ [[  97]
+  [  96]
+  [  95]
+  ...
+  [  56]
+  [  55]
+  [  54]]
 
-       ...,
+ [[ 104]
+  [ 106]
+  [ 107]
+  ...
+  [ 145]
+  [ 146]
+  [ 147]]
 
-       [[4136],
-        [4138],
-        [4139],
-        ...,
-        [4177],
-        [4178],
-        [4180]],
+ ...
 
-       [[4230],
-        [4228],
-        [4227],
-        ...,
-        [4189],
-        [4187],
-        [4186]],
+ [[4136]
+  [4138]
+  [4139]
+  ...
+  [4177]
+  [4178]
+  [4180]]
 
-       [[4237],
-        [4239],
-        [4240],
-        ...,
-        [4278],
-        [4279],
-        [4281]]], dtype=uint64)
+ [[4230]
+  [4228]
+  [4227]
+  ...
+  [4189]
+  [4187]
+  [4186]]
 
+ [[4237]
+  [4239]
+  [4240]
+  ...
+  [4278]
+  [4279]
+  [4281]]]&#39;
+
+
+--------------------------------------------------------------------------------
 [29] /XRF/Timestamps
++ATTRIBUTES: (none)
 
-     array([ 14880000,  14940000,  15000000, ..., 437880000, 437940000,
-       438000000], dtype=uint64)
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
++VALUES: 
+&#39;[ 14880000  14940000  15000000 ... 437880000 437940000 438000000]&#39;
+
+
+--------------------------------------------------------------------------------
 [30] /XRF/XComputedMapsCoordinate
++ATTRIBUTES: (none)
 
-     array([[[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
++SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
++VALUES: 
+&#39;[[[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       ...,
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ ...
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]]])
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]]&#39;
+
+
+--------------------------------------------------------------------------------
 [31] /XRF/YComputedMapsCoordinate
++ATTRIBUTES: (none)
 
-     array([[[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
++SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
++VALUES: 
+&#39;[[[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       ...,
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ ...
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]],
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
 
-       [[nan],
-        [nan],
-        [nan],
-        ...,
-        [nan],
-        [nan],
-        [nan]]])
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]]&#39;
+
 
 </pre>
 </div>
@@ -789,10 +853,10 @@ CONTENT:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="report" class="doc_header"><code>report</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/crono.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>report</code>(<strong><code>crono_filename</code></strong>, <strong><code>content</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="read_datasets" class="doc_header"><code>read_datasets</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/crono.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_datasets</code>(<strong><code>crono_filename</code></strong>)</p>
 </blockquote>
 
-<pre><code>Print datasets and their content from `crono_filename`.</code></pre>
+<pre><code>Read all datasets in `crono_filename`.</code></pre>
 
 </div>
 
@@ -807,6 +871,696 @@ CONTENT:
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="report" class="doc_header"><code>report</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/crono.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>report</code>(<strong><code>crono_filename</code></strong>)</p>
+</blockquote>
+
+<pre><code>Print info about structure and content of datasets in `crono_filename`.</code></pre>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_attrs</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+ATTRIBUTES: 
+        - DateTime: 10/15/2021 14:27:31
+        - TubeTemperature: 57.33
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">...</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;V1&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bytes</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">...</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version&#34;timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xecQ\xb8\x1e\xc5E\xb3@\x00\x00\x00\x00\x00*\xc7@\xc5\xea\x8f0\x0c\xd8\xe5?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc0\xed\x9e&lt;,\xd4\x88c\xc0\x00\x00\x00\x00\x00V\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x01\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff&#34;XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xec+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xca\xa7\x17\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_nesting</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span> 
+    <span class="sd">&#39;&#39;&#39;Report shape or nested shapes of numpy arrays in `dataset`.&#39;&#39;&#39;</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span> 
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">dtype</span> 
+    
+    <span class="n">shape_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;SHAPE: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> DTYPE: </span><span class="se">\&#39;</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="se">\&#39;</span><span class="s1">&#39;</span> 
+    
+    <span class="n">sub_dtype</span> <span class="o">=</span> <span class="kc">None</span> 
+    
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
+        
+        <span class="n">subshape_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span> 
+        <span class="n">sub_dtype</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> 
+        <span class="n">n_sub</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subshape_list</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">n_sub</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span> 
+            
+            <span class="n">subshape_list</span> <span class="o">=</span> <span class="n">subshape_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">subshape_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;....&#39;</span><span class="p">)</span>
+        
+        <span class="n">subshape_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">subshape_list</span><span class="si">}</span><span class="s1">&#39;</span> 
+        <span class="n">shape_str</span> <span class="o">=</span> <span class="n">shape_str</span> <span class="o">+</span> <span class="s1">&#39; SUBSHAPES: &#39;</span> <span class="o">+</span> <span class="n">subshape_str</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; SUB_DTYPE: </span><span class="se">\&#39;</span><span class="si">{</span><span class="n">sub_dtype</span><span class="si">}</span><span class="se">\&#39;</span><span class="s1">&#39;</span>
+    
+    <span class="k">return</span> <span class="n">shape_str</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">sub_dtype</span> 
+
+
+<span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">):</span> 
+    <span class="sd">&#39;&#39;&#39;Print info about structure and content of datasets in `crono_filename`.&#39;&#39;&#39;</span>
+    
+    <span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span> 
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CONTENTS OF CRONO HDF5 FILE: </span><span class="se">\&#39;</span><span class="si">{</span><span class="n">crono_filename</span><span class="si">}</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span><span class="si">}</span><span class="s1"> DATASETS)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span> 
+
+        <span class="n">shape_str</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">sub_dtype</span> <span class="o">=</span> <span class="n">_nesting</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;S1&#39;</span><span class="p">):</span> 
+            <span class="n">value_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">sub_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;V1&#39;</span><span class="p">):</span> 
+            <span class="n">value_str</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="o">...</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="n">sub_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;S1&#39;</span><span class="p">):</span> 
+            <span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="o">...</span><span class="p">]]</span>
+            <span class="n">value_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">value_str</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s1">+</span><span class="si">{</span><span class="n">shape_str</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;+VALUES: </span><span class="se">\n\&#39;</span><span class="si">{</span><span class="n">value_str</span><span class="si">}</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">report</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CONTENTS OF CRONO HDF5 FILE: &#39;14200215102021-blindTest2AgedDetail.HDF5&#39;
+(32 DATASETS)
+
+--------------------------------------------------------------------------------
+[0] /Configuration/FinalSystemStatus
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(4311,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version&#34;timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xecQ\xb8\x1e\xc5E\xb3@\x00\x00\x00\x00\x00*\xc7@\xc5\xea\x8f0\x0c\xd8\xe5?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc0\xed\x9e&lt;,\xd4\x88c\xc0\x00\x00\x00\x00\x00V\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x01\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff&#34;XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xec+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xca\xa7\x17\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
+
+--------------------------------------------------------------------------------
+[1] /Configuration/InitialSystemStatus
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(4311,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version&#34;timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xa4p=\n\x97B\xb3@\x00\x00\x00\x00\x00\x1c\xc7@\xa4\xff\xe5Z\xb4\x00\x9d?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc04\x116&lt;\xbd\x9cc\xc0\x00\x00\x00\x00\x00\xd6\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff&#34;XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\&#39;XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xea+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00=2\x11\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
+
+--------------------------------------------------------------------------------
+[2] /Configuration/Settings
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(2778,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00&#34;XGLabHWLib.XGLabHWControl+Settings\t\x00\x00\x00\x0cdpp_settings\x10dpp_opt_settings\x10dpp_input_offset\x0cccd_settings\x0fmotors_settings\x0fxrf_calibration\x0fram_calibration\x0cxrf_controls\x1btube_material_atomic_number\x04\x04\x04\x04\x04\x04\x04\x04\x00\x1eXGLabHWLib.DPPLib+DPP_settings\x02\x00\x00\x00\&#39;XGLabHWLib.DPPLib+DPP_optional_settings\x02\x00\x00\x00*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x1eXGLabHWLib.CCDLib+CCD_settings\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorsSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00*XGLabHWLib.XGLabHWControl+ControlsSettings\x02\x00\x00\x00\x08\x02\x00\x00\x00\x05\xfd\xff\xff\xff\x1eXGLabHWLib.DPPLib+DPP_settings\x0b\x00\x00\x00\rdetection_thr\npileup_thr\x04gain\x0cpeaking_time\x08flat_top\x11edge_peaking_time\redge_flat_top\x13reset_recovery_time\x0einverted_input\x0ezero_peak_freq\x0bother_param\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0f\x08\x06\x0f\x0f\x0f\x0f\x0f\x01\x06\x0f\x02\x00\x00\x00#\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x08\x00\x00\x00\x07\x00\x00\x00\x07\x00\x00\x00\x01\x00\x00\x00\xe8\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x00\x00\x00\x00\x05\xfc\xff\xff\xff\&#39;XGLabHWLib.DPPLib+DPP_optional_settings\x07\x00\x00\x00\x06gain_2\x06gain_3\x0epeaking_time_2\x0epeaking_time_3\nflat_top_2\nflat_top_3\x06enable\x00\x00\x00\x00\x00\x00\x00\x06\x06\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xfb\xff\xff\xff*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x0boffset_val1\x0boffset_val2\x00\x00\x0f\x0f\x02\x00\x00\x00\x80\x00\x00\x00\x80\x00\x00\x00\x05\xfa\xff\xff\xff\x1eXGLabHWLib.CCDLib+CCD_settings\x04\x00\x00\x00\x08adc_gain\nadc_offset\x0fmax_power_laser\x0cpeltier_temp\x00\x00\x00\x00\x0b\x08\x0f\x08\x02\x00\x00\x00\x00\x00\x80?\n\x00\x00\x00,\x01\x00\x00\xf6\xff\xff\xff\x05\xf9\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorsSettings\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x02\x00\x00\x00\x05\xf8\xff\xff\xff)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x07enabled\rconfiguration\x00\x04\x01.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x02\x00\x00\x00\x02\x00\x00\x00\x01\x05\xf7\xff\xff\xff.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x0b\x00\x00\x00\ttype_name\x07address\x04axis\nisLockStep\x04type\x15microsteps_resolution\tmax_speed\x0cacceleration\x0bunits2steps\x06offset\x10maximum_position\x01\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x0f\x0f\x01%XGLabHWLib.MotorsLibClasses.MotorType\x02\x00\x00\x00\x08\x08\x08\x06\x08\x08\x02\x00\x00\x00\x06\n\x00\x00\x00\x16Standard Linear 600 mm\x03\x00\x00\x00\x01\x00\x00\x00\x00\x05\xf5\xff\xff\xff%XGLabHWLib.MotorsLibClasses.MotorType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00*\x95\n\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf4\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xf3\xff\xff\xff\xf7\xff\xff\xff\x06\x0e\x00\x00\x00\x16Standard Linear 450 mm\x01\x00\x00\x00\x01\x00\x00\x00\x01\x01\xf1\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf0\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xef\xff\xff\xff\xf7\xff\xff\xff\x06\x12\x00\x00\x00\x16Standard Linear 075 mm\x03\x00\x00\x00\x02\x00\x00\x00\x00\x01\xed\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff-XGLabHWLib.XGLabHWControl+CalibrationSettings\t\x00\x00\x00\x0ecalib_p1_count\x0fcalib_p1_energy\x0ecalib_p2_count\x0fcalib_p2_energy\x0ccalib_counts\x0ecalib_energies\x0ecalib_channels\ncalib_mode\x0ecalib_equation\x00\x00\x00\x00\x07\x07\x00\x00\x00\x0b\x0b\x0b\x0b\x0b\x0b\x08\x08\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x15\x00\x00\x00\t\x16\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe9\xff\xff\xff\xec\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x18\x00\x00\x00\t\x19\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xe6\xff\xff\xff*XGLabHWLib.XGLabHWControl+ControlsSettings\x05\x00\x00\x00&#34;limit_factor_single_spectra_enable\x1blimit_factor_mapping_enable\x12limit_factor_alert\x0climit_factor\x12tube_buzzer_enable\x00\x00\x00\x00\x00\x01\x01\x08\x06\x01\x02\x00\x00\x00\x00\x00\x02\x00\x00\x00333333\xc3?\x00-\x00\x00\x00\x0f\x15\x00\x00\x00\x02\x00\x00\x00\x0b\x00\xc0@D\x00\x00\xf4D\x0f\x16\x00\x00\x00\x02\x00\x00\x00\x0bj\xbc\x00A\xd3M\xb1A\x0f\x18\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x00zC\x00\x00\x0cD\x0f\x19\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x80\x8cC\x00\xe0\x87D\x0b&#39;&#39;
+
+--------------------------------------------------------------------------------
+[3] /CreatedDateTime
++SHAPE: (50,) DTYPE: &#39;|S1&#39;
++VALUES: 
+&#39;10/15/2021 14:20:02&#39;
+
+--------------------------------------------------------------------------------
+[4] /CreatedWithSoftwareVersion
++SHAPE: (50,) DTYPE: &#39;|S1&#39;
++VALUES: 
+&#39;CRONO 1.2.4.54&#39;
+
+--------------------------------------------------------------------------------
+[5] /FileStructureVersion
++SHAPE: (2,) DTYPE: &#39;int32&#39;
++VALUES: 
+&#39;[1 6]&#39;
+
+--------------------------------------------------------------------------------
+[6] /Images/Documentation
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+--------------------------------------------------------------------------------
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio
++SHAPE: (1, 2) DTYPE: &#39;float32&#39;
++VALUES: 
+&#39;[[11.085714 11.085714]]&#39;
+
+--------------------------------------------------------------------------------
+[8] /Images/Static
++SHAPE: (13358,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,), (2565,), (2572,), (2525,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+--------------------------------------------------------------------------------
+[9] /Images/StitchedImage
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+--------------------------------------------------------------------------------
+[10] /Images/VideoStreams
++SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;&#39;&#39;
+
+--------------------------------------------------------------------------------
+[11] /XRF/CalibrationPoints
++SHAPE: (2, 2) DTYPE: &#39;float32&#39;
++VALUES: 
+&#39;[[ 771.       8.046]
+ [1952.      22.163]]&#39;
+
+--------------------------------------------------------------------------------
+[12] /XRF/DPPStartTimestamp
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[125903380430 125903380430 125903380430 ... 125903380430 125903380430
+ 125903380430]&#39;
+
+--------------------------------------------------------------------------------
+[13] /XRF/Detected
++SHAPE: (4284,) DTYPE: &#39;uint32&#39;
++VALUES: 
+&#39;[515 578 567 ... 635 603 622]&#39;
+
+--------------------------------------------------------------------------------
+[14] /XRF/EnergyVector
++SHAPE: (4096,) DTYPE: &#39;float32&#39;
++VALUES: 
+&#39;[-1.1700948 -1.1581414 -1.146188  ... 47.755295  47.767246  47.7792   ]&#39;
+
+--------------------------------------------------------------------------------
+[15] /XRF/LiveTimes
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[59436 59356 59368 ... 59300 59336 59316]&#39;
+
+--------------------------------------------------------------------------------
+[16] /XRF/Maps/ComputedMaps
++SHAPE: (85, 37, 27) DTYPE: &#39;float64&#39;
++VALUES: 
+&#39;[[[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
+
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
+
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
+
+ ...
+
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
+
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]
+
+ [[nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  ...
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]
+  [nan nan nan ... nan nan nan]]]&#39;
+
+--------------------------------------------------------------------------------
+[17] /XRF/MotorsPositions
++SHAPE: (4284, 3) DTYPE: &#39;uint32&#39;
++VALUES: 
+&#39;[[132252 111816  46018]
+ [132252 111816  46018]
+ [132273 111816  46018]
+ ...
+ [169155 153817  46018]
+ [169832 153817  46018]
+ [170151 153817  46018]]&#39;
+
+--------------------------------------------------------------------------------
+[18] /XRF/MotorsPositionsStats
++SHAPE: (4284,) DTYPE: &#39;uint8&#39;
++VALUES: 
+&#39;[1 1 1 ... 1 1 1]&#39;
+
+--------------------------------------------------------------------------------
+[19] /XRF/MotorsTimestamps
++SHAPE: (4284, 3) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[[ 8479 11082 13794]
+ [ 8479 11082 13794]
+ [ 8480 11079 13791]
+ ...
+ [ 8597 11195 13809]
+ [ 8594 11195 13809]
+ [ 8596 11199 13810]]&#39;
+
+--------------------------------------------------------------------------------
+[20] /XRF/OutputCountRates
++SHAPE: (4284,) DTYPE: &#39;float64&#39;
++VALUES: 
+&#39;[ 9.38333333 10.31666667 10.15       ... 11.25       10.76666667
+ 11.11666667]&#39;
+
+--------------------------------------------------------------------------------
+[21] /XRF/ROIs/ROIsEnergies
++SHAPE: (27, 2) DTYPE: &#39;float64&#39;
++VALUES: 
+&#39;[[ 1.6389612   1.88998318]
+ [ 2.18881893  2.39202714]
+ [ 3.51564956  3.85034561]
+ [ 4.29262257  4.65122557]
+ [ 5.05764198  5.30866432]
+ [ 5.30866432  5.61945343]
+ [ 5.69117403  6.04977655]
+ [ 6.16931105  6.611588  ]
+ [ 6.77893591  7.24511957]
+ [ 7.54920769  7.54920769]
+ [ 8.36874199  8.87078571]
+ [10.35301113 10.81919479]
+ [12.4209547  12.86323166]
+ [13.90318012 14.45303822]
+ [18.20641518 19.48980331]
+ [ 3.1809535   3.4678359 ]
+ [11.7412138  12.09821224]
+ [ 9.80000019 10.10000038]
+ [11.01045036 11.46468067]
+ [22.85629845 23.54959869]
+ [16.92739868 17.57288361]
+ [14.58452606 14.95508194]
+ [19.83208084 20.5731945 ]
+ [ 1.86607635  2.12905169]
+ [ 7.31684017  7.65153646]
+ [ 8.9664135   9.43259716]
+ [24.81232262 25.71306229]]&#39;
+
+--------------------------------------------------------------------------------
+[22] /XRF/ROIs/ROIsNames
++SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(4,), (3,), (4,), (8,), &#39;....&#39;] SUB_DTYPE: &#39;|S1&#39;
++VALUES: 
+&#39;SiKa
+SKa
+CaKa
+TiKaBaLa
+BaLg
+CrKaBaLl
+MnKa
+FeKa
+FeKbCoKa
+CuKa
+ZnKa
+PbLa
+PbLb
+SrKa
+Compton
+KKa
+AsKb
+HgLa
+SeKa
+CdKa
+New ROI (1)
+New ROI (2)
+RhKa
+PKa
+NiKa
+New ROI (3)
+SnKa&#39;
+
+--------------------------------------------------------------------------------
+[23] /XRF/ROIs/ROIsObjects
++SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(2138,), (2136,), (2138,), (2142,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
++VALUES: 
+&#39;b&#39;\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00GXGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00$XGLabMappingLib.ObservableROIWrapper\x01\x00\x00\x00\x04_roi\x04\x13XGLabMappingLib.ROI\x02\x00\x00\x00\x02\x00\x00\x00\t\x03\x00\x00\x00\x05\x03\x00\x00\x00\x13XGLabMappingLib.ROI\x08\x00\x00\x00\x15&lt;name&gt;k__BackingField\x18&lt;element&gt;k__BackingField\x1b&lt;definition&gt;k__BackingField\x15&lt;type&gt;k__BackingField\x16&lt;start&gt;k__BackingField\x14&lt;end&gt;k__BackingField\x18&lt;palette&gt;k__BackingField\x19&lt;editable&gt;k__BackingField\x01\x01\x04\x04\x00\x00\x04\x00\x1dXGLabMappingLib.ROIDefinition\x02\x00\x00\x00\x1fXGLabMappingLib.ROIAnalysisType\x02\x00\x00\x00\x05\x05\x17XGLabMappingLib.Palette\x02\x00\x00\x00\x01\x02\x00\x00\x00\x06\x04\x00\x00\x00\x04SiKa\x06\x05\x00\x00\x00\x00\x05\xfa\xff\xff\xff\x1dXGLabMappingLib.ROIDefinition\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf9\xff\xff\xff\x1fXGLabMappingLib.ROIAnalysisType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x101.63896119594574\x101.88998317718506\t\x08\x00\x00\x00\x01\x05\x08\x00\x00\x00\x17XGLabMappingLib.Palette\x03\x00\x00\x00\x0b_colorSteps\x1b&lt;autoMaxMin&gt;k__BackingField\x17&lt;smooth&gt;k__BackingField\x04\x00\x00\x1cXGLabMappingLib.PaletteSteps\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\t\t\x00\x00\x00\x01\x01\x05\t\x00\x00\x00\x1cXGLabMappingLib.PaletteSteps\x01\x00\x00\x00\x06_steps\x03\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x02\x00\x00\x00\t\n\x00\x00\x00\x04\n\x00\x00\x00\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x03\x00\x00\x00\x06_items\x05_size\x08_version\x04\x00\x00\x1dXGLabMappingLib.PaletteStep[]\x02\x00\x00\x00\x08\x08\t\x0b\x00\x00\x00\t\x00\x00\x00\t\x00\x00\x00\x07\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x10\x00\x00\x00\x04\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x0c\r\x00\x00\x00QSystem.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\x05\xf4\xff\xff\xff\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x05value\x05color\x00\x04\x06\x14System.Drawing.Color\r\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf2\xff\xff\xff\x14System.Drawing.Color\x04\x00\x00\x00\x04name\x05value\nknownColor\x05state\x01\x00\x00\x00\t\x07\x07\r\x00\x00\x00\n@\x00@\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xf1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@o@\x01\xf0\xff\xff\xff\xf2\xff\xff\xff\n\x80\x00\x80\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xef\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x7f@\x01\xee\xff\xff\xff\xf2\xff\xff\xff\n\xeeh{\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xed\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x87@\x01\xec\xff\xff\xff\xf2\xff\xff\xff\n\xed\x95d\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xeb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x8f@\x01\xea\xff\xff\xff\xf2\xff\xff\xff\n2\xcd2\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x88\x93@\x01\xe8\xff\xff\xff\xf2\xff\xff\xff\n\x90\xee\x90\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x97@\x01\xe6\xff\xff\xff\xf2\xff\xff\xff\n\x00\xff\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00X\x9b@\x01\xe4\xff\xff\xff\xf2\xff\xff\xff\n\x00\xa5\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe3\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x9f@\x01\xe2\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe0\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdf\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xde\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdd\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdc\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xda\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd8\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd6\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd4\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0b&#39;&#39;
+
+--------------------------------------------------------------------------------
+[24] /XRF/RealTimes
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[60000 60000 60000 ... 60000 60000 60000]&#39;
+
+--------------------------------------------------------------------------------
+[25] /XRF/ResetCounterValue
++SHAPE: (4284,) DTYPE: &#39;uint32&#39;
++VALUES: 
+&#39;[ 9 11 11 ... 11 11 11]&#39;
+
+--------------------------------------------------------------------------------
+[26] /XRF/Spectra
++SHAPE: (4284, 4096) DTYPE: &#39;uint16&#39;
++VALUES: 
+&#39;[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]&#39;
+
+--------------------------------------------------------------------------------
+[27] /XRF/SpectraIDs
++SHAPE: (4284,) DTYPE: &#39;uint16&#39;
++VALUES: 
+&#39;[20518 20519 20520 ... 27568 27569 27570]&#39;
+
+--------------------------------------------------------------------------------
+[28] /XRF/SpectraSelectedIndex
++SHAPE: (85, 37, 1) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[[[   4]
+  [   5]
+  [   6]
+  ...
+  [  44]
+  [  45]
+  [  47]]
+
+ [[  97]
+  [  96]
+  [  95]
+  ...
+  [  56]
+  [  55]
+  [  54]]
+
+ [[ 104]
+  [ 106]
+  [ 107]
+  ...
+  [ 145]
+  [ 146]
+  [ 147]]
+
+ ...
+
+ [[4136]
+  [4138]
+  [4139]
+  ...
+  [4177]
+  [4178]
+  [4180]]
+
+ [[4230]
+  [4228]
+  [4227]
+  ...
+  [4189]
+  [4187]
+  [4186]]
+
+ [[4237]
+  [4239]
+  [4240]
+  ...
+  [4278]
+  [4279]
+  [4281]]]&#39;
+
+--------------------------------------------------------------------------------
+[29] /XRF/Timestamps
++SHAPE: (4284,) DTYPE: &#39;uint64&#39;
++VALUES: 
+&#39;[ 14880000  14940000  15000000 ... 437880000 437940000 438000000]&#39;
+
+--------------------------------------------------------------------------------
+[30] /XRF/XComputedMapsCoordinate
++SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
++VALUES: 
+&#39;[[[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ ...
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]]&#39;
+
+--------------------------------------------------------------------------------
+[31] /XRF/YComputedMapsCoordinate
++SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
++VALUES: 
+&#39;[[[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ ...
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]
+
+ [[nan]
+  [nan]
+  [nan]
+  ...
+  [nan]
+  [nan]
+  [nan]]]&#39;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
