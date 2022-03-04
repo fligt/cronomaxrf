@@ -45,7 +45,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://docs.h5py.org/en/stable/special.html#variable-length-strings">https://docs.h5py.org/en/stable/special.html#variable-length-strings</a></p>
+<p>As it turns out, the Crono HDF5 file format is rather complicated are therefore hard to inspect with standard <code>h5py</code> functions. This is due to complicated internal structures of the datasets inside the file. Furthermore, some of the datasets contain binary blobs for which it is still unclear how we can decode them.</p>
+<p>The function <code>read_datasets()</code> can be used to obtain a list of all dataset objects for further processing. Also,  I have created the function <code>report()</code> that knows about these internal structures and reports an extended summary of the full contents of a Crono HDF5 file.</p>
 
 </div>
 </div>
@@ -58,6 +59,10 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">report</span>
+
+<span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
+<span class="n">datasets</span>
 </pre></div>
 
     </div>
@@ -67,104 +72,13 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datasets</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&lt;HDF5 dataset &#34;FinalSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;InitialSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;Settings&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;CreatedDateTime&#34;: shape (50,), type &#34;|S1&#34;&gt;,
- &lt;HDF5 dataset &#34;CreatedWithSoftwareVersion&#34;: shape (50,), type &#34;|S1&#34;&gt;,
- &lt;HDF5 dataset &#34;FileStructureVersion&#34;: shape (2,), type &#34;&lt;i4&#34;&gt;,
- &lt;HDF5 dataset &#34;Documentation&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;ImagePixelSizeRatio&#34;: shape (1, 2), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;Static&#34;: shape (13358,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;StitchedImage&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;VideoStreams&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;CalibrationPoints&#34;: shape (2, 2), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;DPPStartTimestamp&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;Detected&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;EnergyVector&#34;: shape (4096,), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;LiveTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;ComputedMaps&#34;: shape (85, 37, 27), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsPositions&#34;: shape (4284, 3), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsPositionsStats&#34;: shape (4284,), type &#34;|u1&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsTimestamps&#34;: shape (4284, 3), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;OutputCountRates&#34;: shape (4284,), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsEnergies&#34;: shape (27, 2), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsNames&#34;: shape (27,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsObjects&#34;: shape (27,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;RealTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;ResetCounterValue&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;Spectra&#34;: shape (4284, 4096), type &#34;&lt;u2&#34;&gt;,
- &lt;HDF5 dataset &#34;SpectraIDs&#34;: shape (4284,), type &#34;&lt;u2&#34;&gt;,
- &lt;HDF5 dataset &#34;SpectraSelectedIndex&#34;: shape (85, 37, 1), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;Timestamps&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;XComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;YComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;]</pre>
-</div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's see what is inside those datasets.</p>
 
 </div>
 </div>
-
 </div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
