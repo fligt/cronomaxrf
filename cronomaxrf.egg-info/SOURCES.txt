@@ -12,4 +12,5 @@ cronomaxrf.egg-info/SOURCES.txt
 cronomaxrf.egg-info/dependency_links.txt
 cronomaxrf.egg-info/entry_points.txt
 cronomaxrf.egg-info/not-zip-safe
+cronomaxrf.egg-info/requires.txt
 cronomaxrf.egg-info/top_level.txt
