@@ -58,63 +58,10 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cronomaxrf</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>cronomaxrf<span class="o">??</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">report</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-2-7d1182a7d41d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> cronomaxrf <span class="ansi-green-fg">import</span> read_datasets<span class="ansi-blue-fg">,</span> report
-
-<span class="ansi-red-fg">ImportError</span>: cannot import name &#39;read_datasets&#39; from &#39;cronomaxrf&#39; (unknown location)</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -142,19 +89,43 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-4-398e80caf56d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> cronomaxrf <span class="ansi-green-fg">import</span> read_datasets<span class="ansi-blue-fg">,</span> report
-<span class="ansi-green-intense-fg ansi-bold">      2</span> 
-<span class="ansi-green-intense-fg ansi-bold">      3</span> crono_filename <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="ansi-red-fg"># 50 Mb</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> datasets <span class="ansi-blue-fg">=</span> read_datasets<span class="ansi-blue-fg">(</span>crono_filename<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> datasets
 
-<span class="ansi-red-fg">ImportError</span>: cannot import name &#39;read_datasets&#39; from &#39;cronomaxrf&#39; (/mnt/datadisk/Work/Projecten/DoRe/code/crono-maxrf/cronomaxrf/__init__.py)</pre>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;HDF5 dataset &#34;FinalSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;InitialSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;Settings&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;CreatedDateTime&#34;: shape (50,), type &#34;|S1&#34;&gt;,
+ &lt;HDF5 dataset &#34;CreatedWithSoftwareVersion&#34;: shape (50,), type &#34;|S1&#34;&gt;,
+ &lt;HDF5 dataset &#34;FileStructureVersion&#34;: shape (2,), type &#34;&lt;i4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Documentation&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;ImagePixelSizeRatio&#34;: shape (1, 2), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Static&#34;: shape (13358,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;StitchedImage&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;VideoStreams&#34;: shape (1,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;CalibrationPoints&#34;: shape (2, 2), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;DPPStartTimestamp&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;Detected&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;EnergyVector&#34;: shape (4096,), type &#34;&lt;f4&#34;&gt;,
+ &lt;HDF5 dataset &#34;LiveTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ComputedMaps&#34;: shape (85, 37, 27), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsPositions&#34;: shape (4284, 3), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsPositionsStats&#34;: shape (4284,), type &#34;|u1&#34;&gt;,
+ &lt;HDF5 dataset &#34;MotorsTimestamps&#34;: shape (4284, 3), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;OutputCountRates&#34;: shape (4284,), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsEnergies&#34;: shape (27, 2), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsNames&#34;: shape (27,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;ROIsObjects&#34;: shape (27,), type &#34;|O&#34;&gt;,
+ &lt;HDF5 dataset &#34;RealTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;ResetCounterValue&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
+ &lt;HDF5 dataset &#34;Spectra&#34;: shape (4284, 4096), type &#34;&lt;u2&#34;&gt;,
+ &lt;HDF5 dataset &#34;SpectraIDs&#34;: shape (4284,), type &#34;&lt;u2&#34;&gt;,
+ &lt;HDF5 dataset &#34;SpectraSelectedIndex&#34;: shape (85, 37, 1), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;Timestamps&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
+ &lt;HDF5 dataset &#34;XComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;,
+ &lt;HDF5 dataset &#34;YComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;]</pre>
 </div>
+
 </div>
 
 </div>
