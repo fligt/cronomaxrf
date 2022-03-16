@@ -46,7 +46,7 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As it turns out, the Crono HDF5 file format is rather complicated are therefore hard to inspect with standard <code>h5py</code> functions. This is due to complicated internal structures of the datasets inside the file. Furthermore, some of the datasets contain binary blobs for which it is still unclear how we can decode them.</p>
-<p>The function <code>read_datasets()</code> can be used to obtain a list of all dataset objects for further processing. Also,  I have created the function <code>report()</code> that knows about these internal structures and reports an extended summary of the full contents of a Crono HDF5 file.</p>
+<p>The function <code>read_datasets()</code> can be used to obtain a list of all dataset objects for further processing. To inspect the contents of these datasets I have created the functions <code>peek_inside()</code> to inspect the contents of single dataset and <code>report()</code> print an extended summary of the full contents of a Crono HDF5 file.</p>
 
 </div>
 </div>
@@ -58,26 +58,13 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">report</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">peek_inside</span><span class="p">,</span> <span class="n">report</span>
 
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
+<span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
 <span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
-<span class="n">datasets</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -89,43 +76,41 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&lt;HDF5 dataset &#34;FinalSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;InitialSystemStatus&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;Settings&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;CreatedDateTime&#34;: shape (50,), type &#34;|S1&#34;&gt;,
- &lt;HDF5 dataset &#34;CreatedWithSoftwareVersion&#34;: shape (50,), type &#34;|S1&#34;&gt;,
- &lt;HDF5 dataset &#34;FileStructureVersion&#34;: shape (2,), type &#34;&lt;i4&#34;&gt;,
- &lt;HDF5 dataset &#34;Documentation&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;ImagePixelSizeRatio&#34;: shape (1, 2), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;Static&#34;: shape (13358,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;StitchedImage&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;VideoStreams&#34;: shape (1,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;CalibrationPoints&#34;: shape (2, 2), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;DPPStartTimestamp&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;Detected&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;EnergyVector&#34;: shape (4096,), type &#34;&lt;f4&#34;&gt;,
- &lt;HDF5 dataset &#34;LiveTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;ComputedMaps&#34;: shape (85, 37, 27), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsPositions&#34;: shape (4284, 3), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsPositionsStats&#34;: shape (4284,), type &#34;|u1&#34;&gt;,
- &lt;HDF5 dataset &#34;MotorsTimestamps&#34;: shape (4284, 3), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;OutputCountRates&#34;: shape (4284,), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsEnergies&#34;: shape (27, 2), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsNames&#34;: shape (27,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;ROIsObjects&#34;: shape (27,), type &#34;|O&#34;&gt;,
- &lt;HDF5 dataset &#34;RealTimes&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;ResetCounterValue&#34;: shape (4284,), type &#34;&lt;u4&#34;&gt;,
- &lt;HDF5 dataset &#34;Spectra&#34;: shape (4284, 4096), type &#34;&lt;u2&#34;&gt;,
- &lt;HDF5 dataset &#34;SpectraIDs&#34;: shape (4284,), type &#34;&lt;u2&#34;&gt;,
- &lt;HDF5 dataset &#34;SpectraSelectedIndex&#34;: shape (85, 37, 1), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;Timestamps&#34;: shape (4284,), type &#34;&lt;u8&#34;&gt;,
- &lt;HDF5 dataset &#34;XComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;,
- &lt;HDF5 dataset &#34;YComputedMapsCoordinate&#34;: shape (85, 37, 1), type &#34;&lt;f8&#34;&gt;]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0] /Configuration/FinalSystemStatus
+[1] /Configuration/InitialSystemStatus
+[2] /Configuration/Settings
+[3] /CreatedDateTime
+[4] /CreatedWithSoftwareVersion
+[5] /FileStructureVersion
+[6] /Images/Documentation
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio
+[8] /Images/Static
+[9] /Images/StitchedImage
+[10] /Images/VideoStreams
+[11] /XRF/CalibrationPoints
+[12] /XRF/DPPStartTimestamp
+[13] /XRF/Detected
+[14] /XRF/EnergyVector
+[15] /XRF/LiveTimes
+[16] /XRF/Maps/ComputedMaps
+[17] /XRF/MotorsPositions
+[18] /XRF/MotorsPositionsStats
+[19] /XRF/MotorsTimestamps
+[20] /XRF/OutputCountRates
+[21] /XRF/ROIs/ROIsEnergies
+[22] /XRF/ROIs/ROIsNames
+[23] /XRF/ROIs/ROIsObjects
+[24] /XRF/RealTimes
+[25] /XRF/ResetCounterValue
+[26] /XRF/Spectra
+[27] /XRF/SpectraIDs
+[28] /XRF/SpectraSelectedIndex
+[29] /XRF/Timestamps
+[30] /XRF/XComputedMapsCoordinate
+[31] /XRF/YComputedMapsCoordinate
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -136,7 +121,62 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's see what is inside those datasets.</p>
+<p>Below we will need to scroll through quite some data, so let's just pick one dataset <code>[14]</code> to start to inspect its contents. A dataset can contain attributes and values. Normally attributes are used to store metadata and the values part is used to store the actual measured values...</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">peek_inside</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/XRF/EnergyVector:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4096,) DTYPE: &#39;float32&#39;
+
++VALUES: 
+&#39;array([-1.1700948, -1.1581414, -1.146188 , ..., 47.755295 , 47.767246 ,
+       47.7792   ], dtype=float32)&#39;
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, this dataset <code>/XRF/EnergyVector</code> contains no meta data attributes. It contains a single vector with 4096 floating point numbers. From the context it is clear that these are the energy values in keV units for the detector channels.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, now let's see the complete contents of the file.</p>
 
 </div>
 </div>
@@ -198,7 +238,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 [31] /XRF/YComputedMapsCoordinate
 
 --------------------------------------------------------------------------------
-[0] /Configuration/FinalSystemStatus
+[0] /Configuration/FinalSystemStatus:
+
 +ATTRIBUTES: 
         - DateTime: 10/15/2021 14:27:31
         - TubeTemperature: 57.33
@@ -210,7 +251,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[1] /Configuration/InitialSystemStatus
+[1] /Configuration/InitialSystemStatus:
+
 +ATTRIBUTES: 
         - DateTime: 10/15/2021 14:20:06
         - TubeTemperature: 57.33
@@ -222,7 +264,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[2] /Configuration/Settings
+[2] /Configuration/Settings:
+
 +ATTRIBUTES: 
         - Acceleration: 100.0
         - Collimator: 0,5 mm
@@ -246,7 +289,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[3] /CreatedDateTime
+[3] /CreatedDateTime:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (50,) DTYPE: &#39;|S1&#39;
@@ -256,7 +300,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[4] /CreatedWithSoftwareVersion
+[4] /CreatedWithSoftwareVersion:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (50,) DTYPE: &#39;|S1&#39;
@@ -266,17 +311,19 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[5] /FileStructureVersion
+[5] /FileStructureVersion:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (2,) DTYPE: &#39;int32&#39;
 
 +VALUES: 
-&#39;[1 6]&#39;
+&#39;array([1, 6], dtype=int32)&#39;
 
 
 --------------------------------------------------------------------------------
-[6] /Images/Documentation
+[6] /Images/Documentation:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
@@ -286,17 +333,19 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[7] /Images/ImageAdjusting/ImagePixelSizeRatio
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (1, 2) DTYPE: &#39;float32&#39;
 
 +VALUES: 
-&#39;[[11.085714 11.085714]]&#39;
+&#39;array([[11.085714, 11.085714]], dtype=float32)&#39;
 
 
 --------------------------------------------------------------------------------
-[8] /Images/Static
+[8] /Images/Static:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (13358,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,), (2565,), (2572,), (2525,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
@@ -306,7 +355,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[9] /Images/StitchedImage
+[9] /Images/StitchedImage:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
@@ -316,7 +366,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[10] /Images/VideoStreams
+[10] /Images/VideoStreams:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (1,) DTYPE: &#39;object&#39; SUBSHAPES: [(0,)] SUB_DTYPE: &#39;|V1&#39;
@@ -326,7 +377,8 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 
 
 --------------------------------------------------------------------------------
-[11] /XRF/CalibrationPoints
+[11] /XRF/CalibrationPoints:
+
 +ATTRIBUTES: 
         - CalibrationBins: 4096
         - CalibrationEquation: 0
@@ -334,200 +386,212 @@ nb_path: "notebooks/10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"
 +SHAPE: (2, 2) DTYPE: &#39;float32&#39;
 
 +VALUES: 
-&#39;[[ 771.       8.046]
- [1952.      22.163]]&#39;
+&#39;array([[ 771.   ,    8.046],
+       [1952.   ,   22.163]], dtype=float32)&#39;
 
 
 --------------------------------------------------------------------------------
-[12] /XRF/DPPStartTimestamp
+[12] /XRF/DPPStartTimestamp:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[125903380430 125903380430 125903380430 ... 125903380430 125903380430
- 125903380430]&#39;
+&#39;array([125903380430, 125903380430, 125903380430, ..., 125903380430,
+       125903380430, 125903380430], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[13] /XRF/Detected
+[13] /XRF/Detected:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint32&#39;
 
 +VALUES: 
-&#39;[515 578 567 ... 635 603 622]&#39;
+&#39;array([515, 578, 567, ..., 635, 603, 622], dtype=uint32)&#39;
 
 
 --------------------------------------------------------------------------------
-[14] /XRF/EnergyVector
+[14] /XRF/EnergyVector:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4096,) DTYPE: &#39;float32&#39;
 
 +VALUES: 
-&#39;[-1.1700948 -1.1581414 -1.146188  ... 47.755295  47.767246  47.7792   ]&#39;
+&#39;array([-1.1700948, -1.1581414, -1.146188 , ..., 47.755295 , 47.767246 ,
+       47.7792   ], dtype=float32)&#39;
 
 
 --------------------------------------------------------------------------------
-[15] /XRF/LiveTimes
+[15] /XRF/LiveTimes:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[59436 59356 59368 ... 59300 59336 59316]&#39;
+&#39;array([59436, 59356, 59368, ..., 59300, 59336, 59316], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[16] /XRF/Maps/ComputedMaps
+[16] /XRF/Maps/ComputedMaps:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (85, 37, 27) DTYPE: &#39;float64&#39;
 
 +VALUES: 
-&#39;[[[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]
+&#39;array([[[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
 
- [[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
 
- [[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
 
- ...
+       ...,
 
- [[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
 
- [[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
 
- [[nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  ...
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]
-  [nan nan nan ... nan nan nan]]]&#39;
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]]])&#39;
 
 
 --------------------------------------------------------------------------------
-[17] /XRF/MotorsPositions
+[17] /XRF/MotorsPositions:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284, 3) DTYPE: &#39;uint32&#39;
 
 +VALUES: 
-&#39;[[132252 111816  46018]
- [132252 111816  46018]
- [132273 111816  46018]
- ...
- [169155 153817  46018]
- [169832 153817  46018]
- [170151 153817  46018]]&#39;
+&#39;array([[132252, 111816,  46018],
+       [132252, 111816,  46018],
+       [132273, 111816,  46018],
+       ...,
+       [169155, 153817,  46018],
+       [169832, 153817,  46018],
+       [170151, 153817,  46018]], dtype=uint32)&#39;
 
 
 --------------------------------------------------------------------------------
-[18] /XRF/MotorsPositionsStats
+[18] /XRF/MotorsPositionsStats:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint8&#39;
 
 +VALUES: 
-&#39;[1 1 1 ... 1 1 1]&#39;
+&#39;array([1, 1, 1, ..., 1, 1, 1], dtype=uint8)&#39;
 
 
 --------------------------------------------------------------------------------
-[19] /XRF/MotorsTimestamps
+[19] /XRF/MotorsTimestamps:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284, 3) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[[ 8479 11082 13794]
- [ 8479 11082 13794]
- [ 8480 11079 13791]
- ...
- [ 8597 11195 13809]
- [ 8594 11195 13809]
- [ 8596 11199 13810]]&#39;
+&#39;array([[ 8479, 11082, 13794],
+       [ 8479, 11082, 13794],
+       [ 8480, 11079, 13791],
+       ...,
+       [ 8597, 11195, 13809],
+       [ 8594, 11195, 13809],
+       [ 8596, 11199, 13810]], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[20] /XRF/OutputCountRates
+[20] /XRF/OutputCountRates:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;float64&#39;
 
 +VALUES: 
-&#39;[ 9.38333333 10.31666667 10.15       ... 11.25       10.76666667
- 11.11666667]&#39;
+&#39;array([ 9.38333333, 10.31666667, 10.15      , ..., 11.25      ,
+       10.76666667, 11.11666667])&#39;
 
 
 --------------------------------------------------------------------------------
-[21] /XRF/ROIs/ROIsEnergies
+[21] /XRF/ROIs/ROIsEnergies:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (27, 2) DTYPE: &#39;float64&#39;
 
 +VALUES: 
-&#39;[[ 1.6389612   1.88998318]
- [ 2.18881893  2.39202714]
- [ 3.51564956  3.85034561]
- [ 4.29262257  4.65122557]
- [ 5.05764198  5.30866432]
- [ 5.30866432  5.61945343]
- [ 5.69117403  6.04977655]
- [ 6.16931105  6.611588  ]
- [ 6.77893591  7.24511957]
- [ 7.54920769  7.54920769]
- [ 8.36874199  8.87078571]
- [10.35301113 10.81919479]
- [12.4209547  12.86323166]
- [13.90318012 14.45303822]
- [18.20641518 19.48980331]
- [ 3.1809535   3.4678359 ]
- [11.7412138  12.09821224]
- [ 9.80000019 10.10000038]
- [11.01045036 11.46468067]
- [22.85629845 23.54959869]
- [16.92739868 17.57288361]
- [14.58452606 14.95508194]
- [19.83208084 20.5731945 ]
- [ 1.86607635  2.12905169]
- [ 7.31684017  7.65153646]
- [ 8.9664135   9.43259716]
- [24.81232262 25.71306229]]&#39;
+&#39;array([[ 1.6389612 ,  1.88998318],
+       [ 2.18881893,  2.39202714],
+       [ 3.51564956,  3.85034561],
+       [ 4.29262257,  4.65122557],
+       [ 5.05764198,  5.30866432],
+       [ 5.30866432,  5.61945343],
+       [ 5.69117403,  6.04977655],
+       [ 6.16931105,  6.611588  ],
+       [ 6.77893591,  7.24511957],
+       [ 7.54920769,  7.54920769],
+       [ 8.36874199,  8.87078571],
+       [10.35301113, 10.81919479],
+       [12.4209547 , 12.86323166],
+       [13.90318012, 14.45303822],
+       [18.20641518, 19.48980331],
+       [ 3.1809535 ,  3.4678359 ],
+       [11.7412138 , 12.09821224],
+       [ 9.80000019, 10.10000038],
+       [11.01045036, 11.46468067],
+       [22.85629845, 23.54959869],
+       [16.92739868, 17.57288361],
+       [14.58452606, 14.95508194],
+       [19.83208084, 20.5731945 ],
+       [ 1.86607635,  2.12905169],
+       [ 7.31684017,  7.65153646],
+       [ 8.9664135 ,  9.43259716],
+       [24.81232262, 25.71306229]])&#39;
 
 
 --------------------------------------------------------------------------------
-[22] /XRF/ROIs/ROIsNames
+[22] /XRF/ROIs/ROIsNames:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(4,), (3,), (4,), (8,), &#39;....&#39;] SUB_DTYPE: &#39;|S1&#39;
@@ -563,7 +627,8 @@ SnKa&#39;
 
 
 --------------------------------------------------------------------------------
-[23] /XRF/ROIs/ROIsObjects
+[23] /XRF/ROIs/ROIsObjects:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (27,) DTYPE: &#39;object&#39; SUBSHAPES: [(2138,), (2136,), (2138,), (2142,), &#39;....&#39;] SUB_DTYPE: &#39;|V1&#39;
@@ -573,233 +638,242 @@ SnKa&#39;
 
 
 --------------------------------------------------------------------------------
-[24] /XRF/RealTimes
+[24] /XRF/RealTimes:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[60000 60000 60000 ... 60000 60000 60000]&#39;
+&#39;array([60000, 60000, 60000, ..., 60000, 60000, 60000], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[25] /XRF/ResetCounterValue
+[25] /XRF/ResetCounterValue:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint32&#39;
 
 +VALUES: 
-&#39;[ 9 11 11 ... 11 11 11]&#39;
+&#39;array([ 9, 11, 11, ..., 11, 11, 11], dtype=uint32)&#39;
 
 
 --------------------------------------------------------------------------------
-[26] /XRF/Spectra
+[26] /XRF/Spectra:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284, 4096) DTYPE: &#39;uint16&#39;
 
 +VALUES: 
-&#39;[[0 0 0 ... 0 0 0]
- [0 0 0 ... 0 0 0]
- [0 0 0 ... 0 0 0]
- ...
- [0 0 0 ... 0 0 0]
- [0 0 0 ... 0 0 0]
- [0 0 0 ... 0 0 0]]&#39;
+&#39;array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint16)&#39;
 
 
 --------------------------------------------------------------------------------
-[27] /XRF/SpectraIDs
+[27] /XRF/SpectraIDs:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint16&#39;
 
 +VALUES: 
-&#39;[20518 20519 20520 ... 27568 27569 27570]&#39;
+&#39;array([20518, 20519, 20520, ..., 27568, 27569, 27570], dtype=uint16)&#39;
 
 
 --------------------------------------------------------------------------------
-[28] /XRF/SpectraSelectedIndex
+[28] /XRF/SpectraSelectedIndex:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (85, 37, 1) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[[[   4]
-  [   5]
-  [   6]
-  ...
-  [  44]
-  [  45]
-  [  47]]
+&#39;array([[[   4],
+        [   5],
+        [   6],
+        ...,
+        [  44],
+        [  45],
+        [  47]],
 
- [[  97]
-  [  96]
-  [  95]
-  ...
-  [  56]
-  [  55]
-  [  54]]
+       [[  97],
+        [  96],
+        [  95],
+        ...,
+        [  56],
+        [  55],
+        [  54]],
 
- [[ 104]
-  [ 106]
-  [ 107]
-  ...
-  [ 145]
-  [ 146]
-  [ 147]]
+       [[ 104],
+        [ 106],
+        [ 107],
+        ...,
+        [ 145],
+        [ 146],
+        [ 147]],
 
- ...
+       ...,
 
- [[4136]
-  [4138]
-  [4139]
-  ...
-  [4177]
-  [4178]
-  [4180]]
+       [[4136],
+        [4138],
+        [4139],
+        ...,
+        [4177],
+        [4178],
+        [4180]],
 
- [[4230]
-  [4228]
-  [4227]
-  ...
-  [4189]
-  [4187]
-  [4186]]
+       [[4230],
+        [4228],
+        [4227],
+        ...,
+        [4189],
+        [4187],
+        [4186]],
 
- [[4237]
-  [4239]
-  [4240]
-  ...
-  [4278]
-  [4279]
-  [4281]]]&#39;
+       [[4237],
+        [4239],
+        [4240],
+        ...,
+        [4278],
+        [4279],
+        [4281]]], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[29] /XRF/Timestamps
+[29] /XRF/Timestamps:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (4284,) DTYPE: &#39;uint64&#39;
 
 +VALUES: 
-&#39;[ 14880000  14940000  15000000 ... 437880000 437940000 438000000]&#39;
+&#39;array([ 14880000,  14940000,  15000000, ..., 437880000, 437940000,
+       438000000], dtype=uint64)&#39;
 
 
 --------------------------------------------------------------------------------
-[30] /XRF/XComputedMapsCoordinate
+[30] /XRF/XComputedMapsCoordinate:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
 
 +VALUES: 
-&#39;[[[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+&#39;array([[[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- ...
+       ...,
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]]&#39;
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]]])&#39;
 
 
 --------------------------------------------------------------------------------
-[31] /XRF/YComputedMapsCoordinate
+[31] /XRF/YComputedMapsCoordinate:
+
 +ATTRIBUTES: (none)
 
 +SHAPE: (85, 37, 1) DTYPE: &#39;float64&#39;
 
 +VALUES: 
-&#39;[[[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+&#39;array([[[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- ...
+       ...,
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
 
- [[nan]
-  [nan]
-  [nan]
-  ...
-  [nan]
-  [nan]
-  [nan]]]&#39;
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]]])&#39;
 
 
 </pre>
@@ -874,16 +948,35 @@ SnKa&#39;
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="peek_inside" class="doc_header"><code>peek_inside</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/crono.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>peek_inside</code>(<strong><code>dataset</code></strong>, <strong><code>_print</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+
+<pre><code>Summarize structure and content of a `dataset`.</code></pre>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Good, now that we have at least a rough idea of the complete contents of the Crono HDF5 file, we can start to explore the actual spectral image.</strong></p>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
-</div>
-</div>
+    {% endraw %}
+
 </div>
  
 

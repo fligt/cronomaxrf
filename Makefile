@@ -2,11 +2,11 @@
 SHELL := /bin/bash
 SRC = $(wildcard notebooks/*.ipynb)
 
-all: crono-maxrf docs
+all: cronomaxrf docs
 
 crono-maxrf: $(SRC)
 	nbdev_build_lib
-	touch crono-maxrf
+	touch cronomaxrf
 
 sync:
 	nbdev_update_lib

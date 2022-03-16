@@ -3,7 +3,8 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"read_datasets": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
-         "report": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"}
+         "report": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
+         "peek_inside": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"}
 
 modules = ["crono.py"]
 
