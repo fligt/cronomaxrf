@@ -2,13 +2,13 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"read_datasets": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
-         "report": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
-         "peek_inside": "10_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
-         "download": "15_Download-demo-data.ipynb"}
+index = {"download": "10_Download-demo-data.ipynb",
+         "read_datasets": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
+         "report": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
+         "peek_inside": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"}
 
-modules = ["crono.py",
-           "data.py"]
+modules = ["data.py",
+           "crono.py"]
 
 doc_url = "https://fligt.github.io/"
 
