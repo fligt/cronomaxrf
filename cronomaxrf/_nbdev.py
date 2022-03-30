@@ -5,10 +5,20 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"download": "10_Download-demo-data.ipynb",
          "read_datasets": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
          "report": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
-         "peek_inside": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb"}
+         "peek_inside": "20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb",
+         "gridify": "30_Gridify-by-selection.ipynb",
+         "convert_crono": "40_Interpolation-gymnastics.ipynb",
+         "tree": "40_Interpolation-gymnastics.ipynb",
+         "get_array": "40_Interpolation-gymnastics.ipynb",
+         "MAXRF_SPECTRA": "40_Interpolation-gymnastics.ipynb",
+         "MAXRF_CUBE": "40_Interpolation-gymnastics.ipynb",
+         "MAXRF_MAX_SPECTRUM": "40_Interpolation-gymnastics.ipynb",
+         "MAXRF_SUM_SPECTRUM": "40_Interpolation-gymnastics.ipynb",
+         "MAXRF_ENERGIES": "40_Interpolation-gymnastics.ipynb"}
 
 modules = ["data.py",
-           "crono.py"]
+           "crono.py",
+           "interpolation.py"]
 
 doc_url = "https://fligt.github.io/"
 

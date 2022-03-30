@@ -16,6 +16,9 @@ entries:
       title: 'Exploring the Crono MA-XRF HDF5 file format '
       url: Exploring-the-Crono-MA-XRF-HDF5-file-format.html
     - output: web,pdf
+      title: Gridify by selection
+      url: Gridify-by-selection.html
+    - output: web,pdf
       title: 'Interpolation gymnastics '
       url: Interpolation-gymnastics.html
     output: web
