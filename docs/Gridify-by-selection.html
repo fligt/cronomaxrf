@@ -31,140 +31,18 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have a rough idea about the contents of the different datasets, we are ready to visualize the spectral data. As we shall see there is a problem with the motor positions that we need to resolve. I have marked the datasets that we need with a star*.</p>
+<p>Now that we have a rough idea about the contents of the different datasets, we are ready to visualize the spectral data. As we shall see there is a problem with the motor positions that we need to resolve. In order to make clear what the issue is, we need to plot the (x,y) motor positions and the selected spectra. Information about the motor positions and selected spectra is stored in datasets <strong>17</strong> and <strong>28</strong>.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span> 
-
-<span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
-<span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span>   
-    <span class="n">star</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">]:</span> 
-        <span class="n">star</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">star</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> *[14] /XRF/EnergyVector
- *[17] /XRF/MotorsPositions
- *[26] /XRF/Spectra
- *[28] /XRF/SpectraSelectedIndex
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The actual spectral data that we would like to visualize is stored in a (two dimensional) dataset <strong>26</strong>. Note that the table does not contain information about the pixel position at which each spectrum was measured.</p>
+<p>The actual spectral data that we would like to visualize in element maps is stored in a two dimensional table. Note that the table does not contain any information about the pixel position at which each spectrum was measured.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spectra</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">26</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
-<span class="n">n_spectra</span><span class="p">,</span> <span class="n">n_channels</span> <span class="o">=</span> <span class="n">spectra</span><span class="o">.</span><span class="n">shape</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The spectral data contains </span><span class="si">{</span><span class="n">n_spectra</span><span class="si">}</span><span class="s1"> spectra, and each spectrum contains </span><span class="si">{</span><span class="n">n_channels</span><span class="si">}</span><span class="s1"> energy channels.&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The spectral data contains 4284 spectra, and each spectrum contains 4096 energy channels.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Information about the motor positions and selected spectra is stored in datasets <strong>17</strong> and <strong>28</strong>.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">17</span><span class="p">][</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> 
-<span class="n">selected_array</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">28</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
-<span class="n">selected_array</span> <span class="o">=</span> <span class="n">selected_array</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> 
-<span class="n">selected</span> <span class="o">=</span> <span class="n">selected_array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-
-<span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">selected_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> 
-<span class="n">n_sel_spectra</span> <span class="o">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The (selected) spectral image cube has a height x width of&#39;</span> <span class="o">+</span> 
-      <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s1">x</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s1"> pixels = </span><span class="si">{</span><span class="n">n_sel_spectra</span><span class="si">}</span><span class="s1"> spectra.&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The (selected) spectral image cube has a height x width of 85x37 pixels = 3145 spectra.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One would expect to find a rectangular array of sensor positions. Now let's plot the (x, y) positions of all 4284 measured spectra (blue) and see which 3145 positions have been selected (red) by the Crono software.</p>
@@ -218,15 +96,15 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Mm, the xy positions of the sensor are a bit wobbly. We observe 85 rows of selected (<em>y</em>) positions. In each row we count 37 selected spectra (red dots). In order to create a regular grid the Crono software throws away quite some data (all blue dots). It seems that one could do a better job by interpolating. This is the topic of the next section.</p>
-<p>For now let's follow the strategy of the Crono software for exporting to a regular grid (<strong>gridify</strong>) by selecting the red dot spectra and save as regular hdf5 file so that Ana can process the data with her own software. Although our tiny test data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files I will show below how do efficient out of memory computations that read and write directly from and to disk using the excellent python package <a href="https://docs.dask.org/en/stable/">dask</a>.</p>
+<p>Mm, the xy positions of the sensor are a bit wobbly. We observe 85 rows of selected (<em>y</em>) positions. In each row we count 37 selected spectra (red dots). In order create a regular spectral image cube, the Crono software throws away quite some data (all blue dots). It seems that one could do a better job by interpolating. This is the topic of the next section.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For exporting the selected spectra from the crono HDF5 file into a regular spectral image hdf5 file, simply use the <code>gridify()</code> function.</p>
+<p>For now let's follow the crude but effective strategy of the Crono software for exporting to a regular grid (<strong>gridify</strong>) by selecting the red dot spectra and save as regular hdf5 file so that Ana can process the data with her own software. Although our tiny demo data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files we make use of excellent python package <a href="https://docs.dask.org/en/stable/">dask</a> that enables efficient processing of files that do not fit into memory by reading and writing to our hard disk.</p>
+<p>For exporting the selected spectra from the crono HDF5 file into a regular spectral image hdf5 file, now simply use the <code>gridify()</code> function as shown below.</p>
 
 </div>
 </div>
@@ -282,7 +160,7 @@ File size: 25.0 MB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To easily inspect the contents of our freshly created HDF5 file, use the <code>read_datasets()</code> function again.</p>
+<p>The exported (<strong>gridified</strong>) HDF5 file contains the selected spectral data cube that we need for further processing. Typically one now proceeds to obtain element maps. To see how this is done we can compute the iron map from the Fe_Ka band. To easily inspect the contents of our freshly created HDF5 file, use the <code>read_datasets()</code> function again. This file only contains two datasets.</p>
 
 </div>
 </div>
@@ -323,7 +201,7 @@ File size: 25.0 MB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Besides the spectra that were lost in translation the converted HDF5 file contains the selected spectral data cube that we need for further processing. Typically one now proceeds to obtain element maps. To see how this is done we can compute the iron map from the Fe_Ka band.</p>
+<p>We can make a map for iron by integrating over the 6.1-6.7 keV energy band.</p>
 
 </div>
 </div>
@@ -348,7 +226,7 @@ File size: 25.0 MB
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">FeKa_map</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fe_Ka&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fe_Ka map&#39;</span><span class="p">);</span>
 </pre></div>
 
     </div>

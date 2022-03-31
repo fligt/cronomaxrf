@@ -1,9 +1,9 @@
 package:
   name: cronomaxrf
-  version: 0.0.2
+  version: 0.0.3
 source:
-  sha256: c2ecf77e60be5a53c278228292263b7613ecea5b4178967b9e05715b816349ca
-  url: https://files.pythonhosted.org/packages/d0/23/9d79dd2d003c67b59a948414277010a39eb0ff33c34c25e86a5f13cc109a/cronomaxrf-0.0.2.tar.gz
+  sha256: ad1c97696fc16f926012455ed31a0859747ea192bed695b992cbfa5c65f571b1
+  url: https://files.pythonhosted.org/packages/6f/ca/db870613a293c0d3ff22437cc60c9efb5961a7de78a1ed6616202138517b/cronomaxrf-0.0.3.tar.gz
 about:
   dev_url: https://fligt.github.io
   doc_url: https://fligt.github.io
@@ -30,6 +30,7 @@ requirements:
   - numpy
   - IPython
   - b2sdk
+  - dask_ndfilters
   run:
   - pip
   - python
@@ -41,6 +42,7 @@ requirements:
   - numpy
   - IPython
   - b2sdk
+  - dask_ndfilters
 test:
   imports:
   - cronomaxrf
