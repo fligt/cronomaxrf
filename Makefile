@@ -4,7 +4,7 @@ SRC = $(wildcard notebooks/*.ipynb)
 
 all: cronomaxrf docs
 
-crono-maxrf: $(SRC)
+cronomaxrf: $(SRC)
 	nbdev_build_lib
 	touch cronomaxrf
 
