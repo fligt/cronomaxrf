@@ -190,6 +190,8 @@ def gridify(crono_filename):
         gridified_filename = re.sub(ptrn, repl, crono_filename)
 
         # write gridified spectral image to hdf5 file
+        print(f'Converting \'{crono_filename}\':\n')
+
         print(f'(1/2) Writing dataset \'{MAXRF_IMAGE}\' with shape {dask_gridified.shape} to hdf5 file...')
         with ProgressBar():
             dask_gridified.to_hdf5(gridified_filename, MAXRF_IMAGE)

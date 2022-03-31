@@ -31,7 +31,7 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have a rough idea about the contents of the different datasets, we are in a position to visualize the spectral data. As we shall see there is a problem with the motor positions that we need to resolve. Here is a numbered list of all datasets. I have marked the datasets that we need with a star.</p>
+<p>Now that we have a rough idea about the contents of the different datasets, we are ready to visualize the spectral data. As we shall see there is a problem with the motor positions that we need to resolve. I have marked the datasets that we need with a star.</p>
 
 </div>
 </div>
@@ -48,12 +48,11 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 <span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
 <span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span> 
-    
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span>   
     <span class="n">star</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
     <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">]:</span> 
         <span class="n">star</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">star</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">star</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -66,38 +65,10 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  [0] /Configuration/FinalSystemStatus
-  [1] /Configuration/InitialSystemStatus
-  [2] /Configuration/Settings
-  [3] /CreatedDateTime
-  [4] /CreatedWithSoftwareVersion
-  [5] /FileStructureVersion
-  [6] /Images/Documentation
-  [7] /Images/ImageAdjusting/ImagePixelSizeRatio
-  [8] /Images/Static
-  [9] /Images/StitchedImage
-  [10] /Images/VideoStreams
-  [11] /XRF/CalibrationPoints
-  [12] /XRF/DPPStartTimestamp
-  [13] /XRF/Detected
- *[14] /XRF/EnergyVector
-  [15] /XRF/LiveTimes
-  [16] /XRF/Maps/ComputedMaps
+<pre> *[14] /XRF/EnergyVector
  *[17] /XRF/MotorsPositions
-  [18] /XRF/MotorsPositionsStats
-  [19] /XRF/MotorsTimestamps
-  [20] /XRF/OutputCountRates
-  [21] /XRF/ROIs/ROIsEnergies
-  [22] /XRF/ROIs/ROIsNames
-  [23] /XRF/ROIs/ROIsObjects
-  [24] /XRF/RealTimes
-  [25] /XRF/ResetCounterValue
  *[26] /XRF/Spectra
-  [27] /XRF/SpectraIDs
  *[28] /XRF/SpectraSelectedIndex
-  [29] /XRF/Timestamps
-  [30] /XRF/XComputedMapsCoordinate
-  [31] /XRF/YComputedMapsCoordinate
 </pre>
 </div>
 </div>
@@ -248,7 +219,7 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Mm, the xy positions of the sensor are a bit wobbly. We observe 85 rows of selected (<em>y</em>) positions. In each row we count 37 selected spectra (red dots). In order to create a regular grid the Crono software throws away quite some data (all blue dots). It seems that one could do a better job by interpolating. This is the topic of the next section.</p>
-<p>For now let's follow the strategy of the Crono software for exporting to a regular grid (gridify) by selecting the red dot spectra and save as regular hdf5 file so that Ana can process the data with her own software. Although our tiny test data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files I will show below how do efficient out of memory computations that read and write directly from and to disk using the excellent python package <a href="https://docs.dask.org/en/stable/">dask</a>.</p>
+<p>For now let's follow the strategy of the Crono software for exporting to a regular grid (<strong>gridify</strong>) by selecting the red dot spectra and save as regular hdf5 file so that Ana and can process the data with her own software. Although our tiny test data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files I will show below how do efficient out of memory computations that read and write directly from and to disk using the excellent python package <a href="https://docs.dask.org/en/stable/">dask</a>.</p>
 
 </div>
 </div>
@@ -267,7 +238,8 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">gridify</span>  
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">gridify</span> 
+
 <span class="n">gridify</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
 </pre></div>
 
@@ -281,7 +253,9 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(1/2) Writing dataset &#39;/maxrf_image&#39; with shape (85, 37, 4096) to hdf5 file...
+<pre>Converting &#39;14200215102021-blindTest2AgedDetail.HDF5&#39;:
+
+(1/2) Writing dataset &#39;/maxrf_image&#39; with shape (85, 37, 4096) to hdf5 file...
 [########################################] | 100% Completed |  0.2s
 (2/2) Writing dataset &#39;/maxrf_energies&#39; with shape (4096,) to hdf5 file...
 [########################################] | 100% Completed |  0.1s
@@ -364,11 +338,11 @@ File size: 25.0 MB
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">energies</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
 <span class="n">cube</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
 <span class="n">is_iron_Ka_band</span> <span class="o">=</span> <span class="p">(</span><span class="n">energies</span> <span class="o">&gt;</span> <span class="mf">6.1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">energies</span> <span class="o">&lt;</span> <span class="mf">6.7</span><span class="p">)</span> 
-<span class="n">n_channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">is_iron_Ka_band</span><span class="p">)</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">is_iron_Ka_band</span><span class="p">)</span> <span class="c1"># number of channels in the Fe_Ka band </span>
 
-<span class="c1"># integrate slice </span>
+<span class="c1"># integrate FeKa band </span>
 <span class="n">FeKa_slice</span> <span class="o">=</span> <span class="n">cube</span><span class="p">[:,:,</span><span class="n">is_iron_Ka_band</span><span class="p">]</span>
-<span class="n">FeKa_map</span> <span class="o">=</span> <span class="n">FeKa_slice</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_channels</span> <span class="c1"># number of channels in the Fe_Ka band </span>
+<span class="n">FeKa_map</span> <span class="o">=</span> <span class="n">FeKa_slice</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_channels</span> 
 
 <span class="c1"># make plot </span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
@@ -404,7 +378,8 @@ File size: 25.0 MB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>That is it!</strong> We no longer depend on the Crono software for exporting the spectral data in a regular hdf5 file. In the next section we will look into improving the export by interpolation...</p>
+<p><strong>That is it!</strong> We no longer depend on the Crono software for exporting the spectral data in a regular hdf5 file.</p>
+<p>In the next section we will look into improving the export by interpolation...</p>
 
 </div>
 </div>
