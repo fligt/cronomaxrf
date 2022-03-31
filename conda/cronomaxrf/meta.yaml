@@ -1,0 +1,46 @@
+package:
+  name: cronomaxrf
+  version: 0.0.2
+source:
+  sha256: c2ecf77e60be5a53c278228292263b7613ecea5b4178967b9e05715b816349ca
+  url: https://files.pythonhosted.org/packages/d0/23/9d79dd2d003c67b59a948414277010a39eb0ff33c34c25e86a5f13cc109a/cronomaxrf-0.0.2.tar.gz
+about:
+  dev_url: https://fligt.github.io
+  doc_url: https://fligt.github.io
+  home: https://fligt.github.io
+  license: Apache Software
+  license_family: APACHE
+  summary: Python package to read and convert the Crono MA-XRF HDF5 data file format
+build:
+  noarch: python
+  number: '0'
+  script: '{{ PYTHON }} -m pip install . -vv'
+extra:
+  recipe-maintainers:
+  - fligt
+requirements:
+  host:
+  - pip
+  - python
+  - packaging
+  - h5py
+  - dask
+  - zarr
+  - matplotlib
+  - numpy
+  - IPython
+  - b2sdk
+  run:
+  - pip
+  - python
+  - packaging
+  - h5py
+  - dask
+  - zarr
+  - matplotlib
+  - numpy
+  - IPython
+  - b2sdk
+test:
+  imports:
+  - cronomaxrf

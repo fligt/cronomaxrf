@@ -219,7 +219,7 @@ nb_path: "notebooks/30_Gridify-by-selection.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Mm, the xy positions of the sensor are a bit wobbly. We observe 85 rows of selected (<em>y</em>) positions. In each row we count 37 selected spectra (red dots). In order to create a regular grid the Crono software throws away quite some data (all blue dots). It seems that one could do a better job by interpolating. This is the topic of the next section.</p>
-<p>For now let's follow the strategy of the Crono software for exporting to a regular grid (<strong>gridify</strong>) by selecting the red dot spectra and save as regular hdf5 file so that Ana and can process the data with her own software. Although our tiny test data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files I will show below how do efficient out of memory computations that read and write directly from and to disk using the excellent python package <a href="https://docs.dask.org/en/stable/">dask</a>.</p>
+<p>For now let's follow the strategy of the Crono software for exporting to a regular grid (<strong>gridify</strong>) by selecting the red dot spectra and save as regular hdf5 file so that Ana can process the data with her own software. Although our tiny test data files fit well into memory, typical MA-XRF data files can be rather big. In order to be ready for these big files I will show below how do efficient out of memory computations that read and write directly from and to disk using the excellent python package <a href="https://docs.dask.org/en/stable/">dask</a>.</p>
 
 </div>
 </div>
