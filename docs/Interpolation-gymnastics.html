@@ -44,7 +44,7 @@ nb_path: "notebooks/40_Interpolation-gymnastics.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cronomaxrf</span> <span class="kn">import</span> <span class="n">read_datasets</span><span class="p">,</span> <span class="n">get_array</span> 
 
 <span class="n">crono_filename</span> <span class="o">=</span> <span class="s1">&#39;14200215102021-blindTest2AgedDetail.HDF5&#39;</span>   <span class="c1"># 50 Mb </span>
 <span class="n">datasets</span> <span class="o">=</span> <span class="n">read_datasets</span><span class="p">(</span><span class="n">crono_filename</span><span class="p">)</span>
@@ -290,11 +290,11 @@ nb_path: "notebooks/40_Interpolation-gymnastics.ipynb"
 <pre>Computing (smoothed) spectra...
 [########################################] | 100% Completed |  0.7s
 Computing (smoothed) spectral data cube from selection...
-[########################################] | 100% Completed |  0.7s
+[########################################] | 100% Completed |  0.8s
 Computing (smoothed) max spectrum...
-[########################################] | 100% Completed |  0.7s
+[########################################] | 100% Completed |  0.6s
 Computing (smoothed) sum spectrum...
-[########################################] | 100% Completed |  0.7s
+[########################################] | 100% Completed |  0.6s
 Writing channel energies...
 [########################################] | 100% Completed |  0.1s
 </pre>
@@ -363,24 +363,32 @@ Writing channel energies...
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_spectrum_smoothed</span> <span class="o">=</span> <span class="n">get_array</span><span class="p">(</span><span class="n">zipstore_filename</span><span class="p">,</span> <span class="s1">&#39;maxrf_all_spectra&#39;</span><span class="p">)[</span><span class="mi">1234</span><span class="p">]</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+
+<span class="n">my_spectrum</span> <span class="o">=</span> <span class="n">spectra</span><span class="p">[</span><span class="mi">1234</span><span class="p">]</span> <span class="c1"># arbitrary </span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">my_spectrum_smoothed</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energy [keV]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;intensity [# counts]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;XRF spectrum #1234 (smoothed)&#39;</span><span class="p">);</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
+    </details>
 <div class="output_wrapper">
 <div class="output">
 
