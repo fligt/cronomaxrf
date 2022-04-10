@@ -4,34 +4,48 @@ __all__ = ['download']
 
 # Cell
 
-import b2sdk.v2 as b2
+import wget
+import re
+import os
+import sys
+
+
+def _bar_progress(current, total, width=80):
+    '''Create this bar_progress method which is invoked automatically from wget'''
+
+    percent = (100 * current) // total
+    progress_message = f'Downloading {total//1e6} MB: {percent}% '
+    # Don't use print() as it will print in new line every time.
+    sys.stdout.write("\r" + progress_message)
+    sys.stdout.flush()
 
 def download():
-    '''Download all datafiles to try the demo. '''
+    '''Download demo files from cloud storage via wget. '''
 
-    # Backblaze cloud storage credentials
-    bucket_name='crono-maxrf-data-demo'
-    application_key_id='002c0259a1c18960000000005'
-    application_key='K0021ZxgvJXexIPG6cpTRHOBOQ64ceo'
+    cwd = os.getcwd()
 
-    # open connection to bucket
-    info = b2.InMemoryAccountInfo()
-    b2_api = b2.B2Api(info)
-    b2_api.authorize_account('production',  application_key_id, application_key)
+    bucket_url = 'https://f002.backblazeb2.com/file/crono-maxrf-data-demo/'
 
-    # get bucket info
-    bucket = b2_api.get_bucket_by_name(bucket_name)
-    bucket_dict_list = [f[0].as_dict() for f in bucket.ls()]
-    bucket_filenames = [d['fileName'] for d in bucket_dict_list]
-    bucket_filesizes = [d['size'] for d in bucket_dict_list]
+    fname_list = ['14200215102021-blindTest2AgedDetail.HDF5',
+                  'Ink-08-aged-VIS.png']
 
-    print(f'Backblaze cloud storage bucket {bucket_name} contains the following files: ')
-    for i, [fname, fsize] in enumerate(zip(bucket_filenames, bucket_filesizes)):
-        print(f'({i+1}) {fname} ({fsize / 1e6:0.1f}Mb)')
+    n_files = len(fname_list)
 
-    print('\nPlease wait while downloading all files from bucket into your current working directory...')
 
-    for i, fname in enumerate(bucket_filenames):
-        fh = bucket.download_file_by_name(fname)
-        fh.save_to(fname)
+    print(f'Checking your current working directory: \n\'{cwd}\'\n')
+    print(f'Please wait while synchronizing {n_files} files...')
+
+    for i, fname in enumerate(fname_list):
+
+        # do not download again if already present
+        if fname in os.listdir():
+            print(f'({i+1}) \'{fname}')
+
+        # download
+        else:
+            url = bucket_url + fname
+            fname = wget.download(url, bar=_bar_progress)
+            print(f' ({i+1}) \'{fname}')
+
     print('Ready!')
+

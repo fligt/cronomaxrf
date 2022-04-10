@@ -95,13 +95,12 @@ nb_path: "notebooks/10_Download-demo-data.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Backblaze cloud storage bucket crono-maxrf-data-demo contains the following files: 
-(1) 14200215102021-blindTest2AgedDetail.2022214166.Exported.HDF5 (2.7Mb)
-(2) 14200215102021-blindTest2AgedDetail.HDF5 (50.6Mb)
-(3) 14200215102021-blindTest2AgedDetail_FeKa.png (1.2Mb)
-(4) Ink-08-aged-VIS.png (4.5Mb)
+<pre>Checking your current working directory: 
+&#39;/mnt/datadisk/Work/Projecten/DoRe/data/maxrf/crono&#39;
 
-Please wait while downloading all files from bucket into your current working directory...
+Please wait while synchronizing 2 files...
+Downloading 50.0 MB: 100%  (1) &#39;14200215102021-blindTest2AgedDetail.HDF5
+Downloading 4.0 MB: 100%  (2) &#39;Ink-08-aged-VIS.png
 Ready!
 </pre>
 </div>
@@ -115,7 +114,7 @@ Ready!
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Also included in the demo dataset are (1) <strong>another type of HDF5 file</strong> as exported by the Crono software, (3) an iron map as computed by the Crono software, and (4) a photo of the scan area.</em></p>
+<p><em>Also included in the demo dataset is (2) a photo of the scan area.</em></p>
 
 </div>
 </div>
@@ -137,10 +136,10 @@ Ready!
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="download" class="doc_header"><code>download</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/data.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download</code>()</p>
+<h4 id="download" class="doc_header"><code>download</code><a href="https://github.com/fligt/cronomaxrf/tree/main/cronomaxrf/data.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download</code>()</p>
 </blockquote>
 
-<pre><code>Download all datafiles to try the demo.</code></pre>
+<pre><code>Download demo files from cloud storage via wget.</code></pre>
 
 </div>
 
