@@ -9,6 +9,7 @@ import re
 import os
 import sys
 import ssl
+import filehash
 
 def _bar_progress(current, total, width=80):
     '''Create this bar_progress method which is invoked automatically from wget'''
@@ -20,7 +21,7 @@ def _bar_progress(current, total, width=80):
     sys.stdout.flush()
 
 def download():
-    '''Download demo files from cloud storage via wget and ssl.'''
+    '''Download demo files from cloud storage. '''
 
     # trying to fix SSL errors with wget.download()  below
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -32,13 +33,17 @@ def download():
     fname_list = ['14200215102021-blindTest2AgedDetail.HDF5',
                   'Ink-08-aged-VIS.png']
 
+    #sha1 file hashes
+    fhash_list = ['386bff97bed28d0302bf93abd00d591c4f45b44d',
+                 '7d8c7f1c5f105f10c0ec06fdb9440cf3ea9c00aa']
+
     n_files = len(fname_list)
 
 
     print(f'Checking your current working directory: \n\'{cwd}\'\n')
     print(f'Please wait while synchronizing {n_files} files...')
 
-    for i, fname in enumerate(fname_list):
+    for i, [fname, fhash] in enumerate(zip(fname_list, fhash_list)):
 
         # do not download again if already present
         if fname in os.listdir():
@@ -48,7 +53,21 @@ def download():
         else:
             url = bucket_url + fname
             fname = wget.download(url, bar=_bar_progress)
-            print(f' ({i+1}) \'{fname}')
+            is_ok = _check_filehash(fname, fhash)
+            if is_ok:
+                print(f' ({i+1}) \'{fname}')
+            else:
+                print('Warning! Downloaded file contains errors.')
+                print('Automatically deleting downloaded file for safety reasons!')
+                os.remove(fname)
 
     print('Ready!')
 
+
+def _check_filehash(fname, fhash):
+    '''Check file integrity.'''
+
+    sha1 = filehash.FileHash('sha1')
+    is_ok = sha1.hash_file(fname) == fhash
+
+    return is_ok
