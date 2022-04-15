@@ -8,7 +8,7 @@ import wget
 import re
 import os
 import sys
-
+import ssl
 
 def _bar_progress(current, total, width=80):
     '''Create this bar_progress method which is invoked automatically from wget'''
@@ -20,7 +20,10 @@ def _bar_progress(current, total, width=80):
     sys.stdout.flush()
 
 def download():
-    '''Download demo files from cloud storage via wget. '''
+    '''Download demo files from cloud storage via wget and ssl.'''
+
+    # trying to fix SSL errors with wget.download()  below
+    ssl._create_default_https_context = ssl._create_unverified_context
 
     cwd = os.getcwd()
 
