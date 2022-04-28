@@ -169,8 +169,9 @@ import os
 def gridify(crono_filename):
     '''Export Crono maxrf file spectral data into regular spectral image hdf5 file. '''
 
-    MAXRF_IMAGE = '/maxrf_image'
-    MAXRF_ENERGIES = '/maxrf_energies'
+    # Datamunger should be able to read these
+    MAXRF_IMAGE = '/spectra'
+    MAXRF_ENERGIES = '/wavelength'
 
     with h5py.File(crono_filename, mode='r') as fh:
 
