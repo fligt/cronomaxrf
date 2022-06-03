@@ -2,7 +2,7 @@ repository: fligt/cronomaxrf
 output: web
 topnav_title: cronomaxrf
 site_title: cronomaxrf
-company_name: Frank Ligterink
+company_name: Rijksdienst voor het Cultureel Erfgoed 
 description: Python package to read and convert the Crono MA-XRF HDF5 data file format
 # Set to false to disable KaTeX math
 use_math: true
