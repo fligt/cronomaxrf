@@ -24,6 +24,9 @@ entries:
     - output: web,pdf
       title: 'Interpolation gymnastics '
       url: Interpolation-gymnastics.html
+    - output: web,pdf
+      title: 'How about the images? '
+      url: How-about-the-images.html
     output: web
     title: cronomaxrf
   output: web
