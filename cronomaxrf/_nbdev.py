@@ -20,7 +20,7 @@ modules = ["data.py",
            "crono.py",
            "interpolation.py"]
 
-doc_url = "https://openheritagescience.org/cronomaxrf"
+doc_url = "https://openheritagescience.org/cronomaxrf/"
 
 git_url = "https://github.com/fligt/cronomaxrf/tree/main/"
 
