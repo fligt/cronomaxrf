@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['read_datasets', 'report', 'peek_inside']
 
-# %% ../notebooks/20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb 16
+# %% ../notebooks/20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb 17
 import h5py 
 import numpy as np 
 

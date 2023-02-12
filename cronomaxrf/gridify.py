@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['gridify']
 
-# %% ../notebooks/30_Gridify-by-selection.ipynb 24
+# %% ../notebooks/30_Gridify-by-selection.ipynb 25
 # python package for reading hdf5 files 
 import h5py 
 

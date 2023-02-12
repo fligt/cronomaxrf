@@ -4,7 +4,7 @@
 __all__ = ['MAXRF_SPECTRA', 'MAXRF_CUBE', 'MAXRF_MAX_SPECTRUM', 'MAXRF_SUM_SPECTRUM', 'MAXRF_ENERGIES', 'convert_crono', 'tree',
            'get_array']
 
-# %% ../notebooks/40_Interpolation-gymnastics.ipynb 27
+# %% ../notebooks/40_Interpolation-gymnastics.ipynb 28
 # python package for reading hdf5 files 
 import h5py 
 
@@ -27,7 +27,7 @@ import re
 import matplotlib.pyplot as plt 
 from IPython.display import HTML 
 
-# %% ../notebooks/40_Interpolation-gymnastics.ipynb 28
+# %% ../notebooks/40_Interpolation-gymnastics.ipynb 29
 # standard datapath locations for zarr zipstore 
 MAXRF_SPECTRA = 'maxrf_all_spectra'
 MAXRF_CUBE = 'maxrf_cube'
