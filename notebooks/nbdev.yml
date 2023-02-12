@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "cronomaxrf"
+  site-url: "https://fligt.github.io/cronomaxrf"
+  description: "Python package to read and convert the Crono MA-XRF HDF5 data file format"
+  repo-branch: main
+  repo-url: "https://github.com/fligt/cronomaxrf"

@@ -1,0 +1,10 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 05_Getting-started.ipynb
+      - 10_Download-demo-data.ipynb
+      - 20_Exploring-the-Crono-MA-XRF-HDF5-file-format.ipynb
+      - 30_Gridify-by-selection.ipynb
+      - 40_Interpolation-gymnastics.ipynb
+      - 50_How-about-the-images.ipynb
