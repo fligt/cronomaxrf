@@ -19,6 +19,6 @@ website:
         href: "https://github.com/fligt/cronomaxrf"
   sidebar:
     style: floating
-  page-footer: "Rijkserfgoedlaboratorium" 
+  page-footer: date "Rijkserfgoedlaboratorium" 
 
 metadata-files: [nbdev.yml, sidebar.yml]
