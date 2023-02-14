@@ -8,6 +8,7 @@ format:
     toc: true
 
 website:
+  page-navigation: true
   twitter-card: true
   open-graph: true
   repo-actions: [issue]
@@ -19,6 +20,6 @@ website:
         href: "https://github.com/fligt/cronomaxrf"
   sidebar:
     style: floating
-  page-footer: {{ date }} "Rijkserfgoedlaboratorium" 
+  page-footer: "2023 Rijkserfgoedlaboratorium Amsterdam"
 
 metadata-files: [nbdev.yml, sidebar.yml]
