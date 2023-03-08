@@ -3,13 +3,13 @@
 # %% auto 0
 __all__ = ['gridify']
 
-# %% ../notebooks/30_Gridify-by-selection.ipynb 25
+# %% ../notebooks/30_Gridify-by-selection.ipynb 26
 # python package for reading hdf5 files 
 import h5py 
 
 # python package for processing too-big-for-memory data 
 import dask 
-import dask.array as da 
+import dask.array as da  
 #import dask_ndfilters 
 from dask.diagnostics import ProgressBar 
 
@@ -17,12 +17,12 @@ from dask.diagnostics import ProgressBar
 import re 
 import os
 
-def gridify(crono_filename): 
+def gridify(crono_filename, overwrite=False): 
     '''Export Crono maxrf file spectral data into regular spectral image hdf5 file. '''
     
     # Datamunger should be able to read these 
     MAXRF_IMAGE = '/spectra'
-    MAXRF_ENERGIES = '/wavelength'
+    MAXRF_ENERGIES = '/energies' 
 
     with h5py.File(crono_filename, mode='r') as fh: 
 
@@ -40,6 +40,11 @@ def gridify(crono_filename):
         ptrn = '\.[^\.]*$'  
         repl = '_GRIDIFIED.HDF5'
         gridified_filename = re.sub(ptrn, repl, crono_filename)
+        
+        # if file exists already 
+        if os.path.exists(gridified_filename): 
+            print(f'Overwriting existing file: {gridified_filename}...\n')
+            os.remove(gridified_filename)
 
         # write gridified spectral image to hdf5 file 
         print(f'Converting \'{crono_filename}\':\n')
@@ -54,7 +59,10 @@ def gridify(crono_filename):
             dask_energies.to_hdf5(gridified_filename, MAXRF_ENERGIES)
             
         filesize_MB = os.path.getsize(gridified_filename) // 1e6
-        print(f'File size: {filesize_MB} MB')
+        print(f'File size: {filesize_MB} MB') 
+        
+        # close input file handle (should not be necessa)
+        fh.close()
             
         return gridified_filename
 
