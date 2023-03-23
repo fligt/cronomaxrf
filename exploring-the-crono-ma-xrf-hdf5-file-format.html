@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A peek inside">
+
+<title>cronomaxrf - Exploring the Crono MA-XRF HDF5 file format</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./gridify-by-selection.html" rel="next">
+<link href="./download-demo-data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="cronomaxrf - Exploring the Crono MA-XRF HDF5 file format">
+<meta property="og:description" content="A peek inside">
+<meta property="og:site-name" content="cronomaxrf">
+<meta name="twitter:title" content="cronomaxrf - Exploring the Crono MA-XRF HDF5 file format">
+<meta name="twitter:description" content="A peek inside">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">cronomaxrf</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fligt/cronomaxrf"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Exploring the Crono MA-XRF HDF5 file format</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome to cronomaxrf</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./download-demo-data.html" class="sidebar-item-text sidebar-link">Download demo data</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exploring-the-crono-ma-xrf-hdf5-file-format.html" class="sidebar-item-text sidebar-link active">Exploring the Crono MA-XRF HDF5 file format</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gridify-by-selection.html" class="sidebar-item-text sidebar-link">Gridify by selection</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpolation-gymnastics.html" class="sidebar-item-text sidebar-link">Interpolation gymnastics</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how-about-the-images.html" class="sidebar-item-text sidebar-link">How about the images?</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#api" id="toc-api" class="nav-link active" data-scroll-target="#api">API</a>
+  <ul class="collapse">
+  <li><a href="#peek_inside" id="toc-peek_inside" class="nav-link" data-scroll-target="#peek_inside">peek_inside</a></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">report</a></li>
+  <li><a href="#read_datasets" id="toc-read_datasets" class="nav-link" data-scroll-target="#read_datasets">read_datasets</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fligt/cronomaxrf/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Exploring the Crono MA-XRF HDF5 file format</h1>
+</div>
+
+<div>
+  <div class="description">
+    A peek inside
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>The HDF5 file format is an open self documentable data container file format. It contains Groups and Datasets that can be understood as (sub)folders and files. An excellent python package that can be used to explore and read the contents of an hdf5 file is <a href="https://docs.h5py.org/en/stable/index.html">h5py</a> by Andrew Collette. If you want to read more, the book by Andrew Collette <em>Python and HDF5 - Unlocking scientific data</em>, is an excellent introduction.</p>
+<div id="fig-book" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><a href="https://www.oreilly.com/library/view/python-and-hdf5/9781491944981/"><img width="30%" src="https://learning.oreilly.com/library/cover/9781491944981/250w/" class="figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: An excellent introduction into the HDF5 format</figcaption><p></p>
+</figure>
+</div>
+<p>As it turns out, the Crono HDF5 file format is rather complicated are therefore hard to inspect with standard <code>h5py</code> functions. This is due to complicated internal structures of the datasets inside the file. Furthermore, some of the datasets contain binary blobs for which it is still unclear how we can decode them.</p>
+<p>The function <code>read_datasets()</code> can be used to obtain a list of all dataset objects for further processing. To inspect the contents of these datasets I have created the functions <code>peek_inside()</code> to inspect the contents of single dataset and <code>report()</code> print an extended summary of the full contents of a Crono HDF5 file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cronomaxrf <span class="im">import</span> read_datasets, peek_inside, report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>crono_filename <span class="op">=</span> <span class="st">'14200215102021-blindTest2AgedDetail.HDF5'</span>   <span class="co"># 50 Mb </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datasets <span class="op">=</span> read_datasets(crono_filename)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, d <span class="kw">in</span> <span class="bu">enumerate</span>(datasets): </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'[</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">] </span><span class="sc">{</span>d<span class="sc">.</span>name<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0] /Configuration/FinalSystemStatus
+[1] /Configuration/InitialSystemStatus
+[2] /Configuration/Settings
+[3] /CreatedDateTime
+[4] /CreatedWithSoftwareVersion
+[5] /FileStructureVersion
+[6] /Images/Documentation
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio
+[8] /Images/Static
+[9] /Images/StitchedImage
+[10] /Images/VideoStreams
+[11] /XRF/CalibrationPoints
+[12] /XRF/DPPStartTimestamp
+[13] /XRF/Detected
+[14] /XRF/EnergyVector
+[15] /XRF/LiveTimes
+[16] /XRF/Maps/ComputedMaps
+[17] /XRF/MotorsPositions
+[18] /XRF/MotorsPositionsStats
+[19] /XRF/MotorsTimestamps
+[20] /XRF/OutputCountRates
+[21] /XRF/ROIs/ROIsEnergies
+[22] /XRF/ROIs/ROIsNames
+[23] /XRF/ROIs/ROIsObjects
+[24] /XRF/RealTimes
+[25] /XRF/ResetCounterValue
+[26] /XRF/Spectra
+[27] /XRF/SpectraIDs
+[28] /XRF/SpectraSelectedIndex
+[29] /XRF/Timestamps
+[30] /XRF/XComputedMapsCoordinate
+[31] /XRF/YComputedMapsCoordinate</code></pre>
+</div>
+</div>
+<p>Below we will need to scroll through quite some data, so let’s just pick one dataset <code>[14]</code> to start to inspect its contents. A dataset can contain attributes and values. Normally attributes are used to store metadata and the values part is used to store the actual measured values…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>peek_inside(datasets[<span class="dv">14</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/XRF/EnergyVector:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4096,) DTYPE: 'float32'
+
++VALUES: 
+'array([-1.1700948, -1.1581414, -1.146188 , ..., 47.755295 , 47.767246 ,
+       47.7792   ], dtype=float32)'
+
+</code></pre>
+</div>
+</div>
+<p>Ok, this dataset <code>/XRF/EnergyVector</code> contains no meta data attributes. It contains a single vector with 4096 floating point numbers. From the context it is clear that these are the energy values in keV units for the detector channels.</p>
+<p>Ok, now let’s see the complete contents of the file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>report(crono_filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CONTENTS OF CRONO HDF5 FILE: '14200215102021-blindTest2AgedDetail.HDF5'
+(32 DATASETS)
+
+[0] /Configuration/FinalSystemStatus
+[1] /Configuration/InitialSystemStatus
+[2] /Configuration/Settings
+[3] /CreatedDateTime
+[4] /CreatedWithSoftwareVersion
+[5] /FileStructureVersion
+[6] /Images/Documentation
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio
+[8] /Images/Static
+[9] /Images/StitchedImage
+[10] /Images/VideoStreams
+[11] /XRF/CalibrationPoints
+[12] /XRF/DPPStartTimestamp
+[13] /XRF/Detected
+[14] /XRF/EnergyVector
+[15] /XRF/LiveTimes
+[16] /XRF/Maps/ComputedMaps
+[17] /XRF/MotorsPositions
+[18] /XRF/MotorsPositionsStats
+[19] /XRF/MotorsTimestamps
+[20] /XRF/OutputCountRates
+[21] /XRF/ROIs/ROIsEnergies
+[22] /XRF/ROIs/ROIsNames
+[23] /XRF/ROIs/ROIsObjects
+[24] /XRF/RealTimes
+[25] /XRF/ResetCounterValue
+[26] /XRF/Spectra
+[27] /XRF/SpectraIDs
+[28] /XRF/SpectraSelectedIndex
+[29] /XRF/Timestamps
+[30] /XRF/XComputedMapsCoordinate
+[31] /XRF/YComputedMapsCoordinate
+
+--------------------------------------------------------------------------------
+[0] /Configuration/FinalSystemStatus:
+
++ATTRIBUTES: 
+        - DateTime: 10/15/2021 14:27:31
+        - TubeTemperature: 57.33
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(4311,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00"XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version"timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xecQ\xb8\x1e\xc5E\xb3@\x00\x00\x00\x00\x00*\xc7@\xc5\xea\x8f0\x0c\xd8\xe5?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc0\xed\x9e&lt;,\xd4\x88c\xc0\x00\x00\x00\x00\x00V\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x01\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff"XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\'XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xec+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xca\xa7\x17\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x01\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b''
+
+
+--------------------------------------------------------------------------------
+[1] /Configuration/InitialSystemStatus:
+
++ATTRIBUTES: 
+        - DateTime: 10/15/2021 14:20:06
+        - TubeTemperature: 57.33
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(4311,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00 XGLabHWLib.XGLabHWControl+Status\x0b\x00\x00\x00\x05state\x04mode\ndpp_status\x08dpp_info\x13cboardXRaman_status\nccd_status\x0craman_status\x08ccd_info\x0bwaitCounter\rmotors_status\x13dpp_start_timestamp\x04\x04\x04\x04\x04\x04\x04\x04\x00\x04\x00%XGLabHWLib.XGLabHWControl+DeviceState\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+DeviceMode\x02\x00\x00\x00\x1cXGLabHWLib.DPPLib+DPP_Status\x02\x00\x00\x00\x1aXGLabHWLib.DPPLib+DPP_info\x02\x00\x00\x00.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage\x02\x00\x00\x00$XGLabHWLib.XGLabHWControl+CCD_status\x02\x00\x00\x00!XGLabHWLib.CCDLib+detector_status\x02\x00\x00\x00"XGLabHWLib.XGLabHWControl+CCD_info\x02\x00\x00\x00\x08(XGLabHWLib.MotorsLibClasses.MotorsStatus\x02\x00\x00\x00\x10\x02\x00\x00\x00\x05\xfd\xff\xff\xff%XGLabHWLib.XGLabHWControl+DeviceState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x05\xfc\xff\xff\xff$XGLabHWLib.XGLabHWControl+DeviceMode\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x03\x00\x00\x00\x05\xfb\xff\xff\xff\x1cXGLabHWLib.DPPLib+DPP_Status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xfa\xff\xff\xff\x1aXGLabHWLib.DPPLib+DPP_info\x08\x00\x00\x00\x04name\x0efirmware_major\x0efirmware_minor\x10firmware_release\x02id\x08channels\x0blib_version"timestamps_conv_factor_ticks_to_us\x01\x00\x00\x00\x00\x00\x01\x00\x0f\x0f\x0f\x0f\x0f\x06\x02\x00\x00\x00\x06\x07\x00\x00\x00\x07SN02432\x02\x00\x00\x00\x01\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x06\x08\x00\x00\x00\x072.4.3.0H\xe1z\x14\xaeG\xe1?\x05\xf7\xff\xff\xff.XGLabHWLib.CBoardXRamanLib+CBoardXRamanPackage;\x00\x00\x00\x05state\x0cflag_LED_RED\x0cflag_EXT_LED\rflag_EXT_LAMP\x15flag_X_TUBE_HV_ENABLE\x11flag_X_TUBE_POWER\x13flag_FILAMENT_READY\rflag_LASER_EN\x0eflag_POWER_SDD\x08flag_FAN\rflag_POWER_5V\x07flag_EV\x0eflag_INTERLOCK\x12flag_SERVO_COLL_EN\x14flag_SERVO_FILTER_EN\x12flag_reset_sw_flag\x0cflag_PC_SHDW\x0fflag_EXTLAMP_OK\x0eflag_ALARM_OUT\rflag_ALARM_IN\x11flag_ALARM_OUT_EN\x11flag_LIGHT_RED_ON\x13flag_LIGHT_GREEN_ON\x12flag_LIGHT_BLUE_ON\x13flag_LIGHT_WHITE_ON\x10flag_LIGHT_IR_ON\x10flag_LIGHT_UV_ON\x0fflag_LASER_1_ON\x0fflag_LASER_2_ON\x0eflag_BUZZER_ON\x0cflag_SHDW_ON\tTPM_value\x08HM_value\x0cMON_5V_value\rMON_12V_value\x0fX_TUBE_HV_value\x11X_TUBE_CURR_value\x10MON_5V_USB_value\x0eSDD_TEMP_value\x0cSDD_HV_value\x14CURR_12V_SENSE_value\x0efirm_maj_value\x0efirm_min_value\x0efirm_sub_value\rled_red_Value\x0eEXT_TEMP_value\x0eflag_DPP_POWER\x0fflag_LIGHT_1_ON\x0fflag_LIGHT_2_ON\x17flag_TUBE_BUZZER_ENABLE\x11flag_MOTOR_REJECT\x12flag_MOTOR_WARNING\x15flag_MOTOR_WAIT_REPLY\x14flag_MOTOR_REPLY_RDY\x13flag_MOTOR_X_MOVING\x13flag_MOTOR_Y_MOVING\x13flag_MOTOR_Z_MOVING\x0eflag_DPP_START\x0cflag_DPP_EOL\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x02\x00\x00\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x06\x06\x06\x06\x06\x06\x06\x06\x06\x06\x02\x02\x02\x01\x06\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x02\x00\x00\x00\x05\xf6\xff\xff\xff-XGLabHWLib.CBoardXRamanLib+CBoardXRamanStatus\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01\x01\x01\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80=\xaaL@\x00\x00\x00\x00\x00\x00\x00\x00\xa4p=\n\x97B\xb3@\x00\x00\x00\x00\x00\x1c\xc7@\xa4\xff\xe5Z\xb4\x00\x9d?\x1a\xa8\x8c\x7f\x9fq\xb9\xbf\xcd\xcc\xcc\xcc\xcc\xcc\x1f@\xd7\xa3p=\ngC\xc04\x116&lt;\xbd\x9cc\xc0\x00\x00\x00\x00\x00\xd6\xa3@\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfe\xaf@\x01\x00\x01\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x05\xf5\xff\xff\xff$XGLabHWLib.XGLabHWControl+CCD_status\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf4\xff\xff\xff!XGLabHWLib.CCDLib+detector_status\t\x00\x00\x00\x07present\x07enabled\x07running\x19required_integration_time\x15required_acquisitions\x18elapsed_integration_time\x14elapsed_acquisitions\x13exposed_acquisition\x10sum_acquisitions\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x01\x0f\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf3\xff\xff\xff"XGLabHWLib.XGLabHWControl+CCD_info\x0f\x00\x00\x00\x06serial\x04name\ndet_number\ndev_number\rversion_major\rversion_minor\rversion_build\x08dna_high\x07dna_low\x14laserCaseTemperature\x15laserPhotodiodeOutput\x0epeltierCurrent\x0emonitorVoltage\x0claserCurrent\x0eccdTemperature\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19System.Text.StringBuilder\x19System.Text.StringBuilder\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x06\x06\x06\x06\x06\x06\x02\x00\x00\x00\t\x0e\x00\x00\x00\t\x0f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x05\xf0\xff\xff\xff(XGLabHWLib.MotorsLibClasses.MotorsStatus\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\'XGLabHWLib.MotorsLibClasses.MotorStatus\x02\x00\x00\x00\x02\x00\x00\x00\x05\xef\xff\xff\xff\'XGLabHWLib.MotorsLibClasses.MotorStatus\x07\x00\x00\x00\x05state\x08Position\x06Moving\tHomeState\x04info\nlockedAxis\x0elockedJoystick\x04\x00\x04\x04\x04\x00\x00,XGLabHWLib.MotorsLibClasses.MotorsConnection\x02\x00\x00\x00\x08,XGLabHWLib.MotorsLibClasses.MotorMovingState\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorHomeState\x02\x00\x00\x00,XGLabHWLib.MotorsLibClasses.MotorInformation\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\x05\xee\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorsConnection\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\xea+\x1a\x00\x05\xed\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorMovingState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorHomeState\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x01\x00\x00\x00\x05\xeb\xff\xff\xff,XGLabHWLib.MotorsLibClasses.MotorInformation\x03\x00\x00\x00\x0eFirmware_Major\x0eFirmware_Minor\tDevice_ID\x00\x00\x00\x08\x08\x08\x02\x00\x00\x00\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xea\xff\xff\xff\xef\xff\xff\xff\x01\xe9\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00=2\x11\x00\x01\xe8\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe7\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe6\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x01\xe5\xff\xff\xff\xef\xff\xff\xff\x01\xe4\xff\xff\xff\xee\xff\xff\xff\x01\x00\x00\x00\xbd\x13\x07\x00\x01\xe3\xff\xff\xff\xed\xff\xff\xff\x00\x00\x00\x00\x01\xe2\xff\xff\xff\xec\xff\xff\xff\x01\x00\x00\x00\x01\xe1\xff\xff\xff\xeb\xff\xff\xff\x07\x00\x00\x00\r\x00\x00\x00\x0ev\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x0e\x00\x00\x00\x19System.Text.StringBuilder\x04\x00\x00\x00\rm_MaxCapacity\x08Capacity\rm_StringValue\x0fm_currentThread\x00\x00\x01\x00\x08\x08\x08\xff\xff\xff\x7f\x10\x00\x00\x00\x06 \x00\x00\x00\x00\x00\x00\x00\x00\x01\x0f\x00\x00\x00\x0e\x00\x00\x00\xff\xff\xff\x7f\x10\x00\x00\x00\t \x00\x00\x00\x00\x00\x00\x00\x0b''
+
+
+--------------------------------------------------------------------------------
+[2] /Configuration/Settings:
+
++ATTRIBUTES: 
+        - Acceleration: 100.0
+        - Collimator: 0,5 mm
+        - Filter: No filter
+        - MapSetup: b'\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00GXGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00\x18XGLabMappingLib.MapSetup\x14\x00\x00\x00\x1bASCII_optionalFiles_enabled\x15folder_images_enabled\x13hdf5_images_enabled\x06folder\x05speed\x0cacceleration\nx_map_size\ny_map_size\x0cspectra_time\r_rowsDistance\nx_map_left\x0cy_map_bottom\x18origin_width_height_mode\x13required_pixel_size\rrequired_time\x16manual_resolution_mode\x0bguided_mode\x0eline_dead_time\rbinningFactor\x13NyquistMarginFactor\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x01\x01\x01\x06\x06\x0f\x0f\x0f\x06\x08\x08\x01\x0f\x0c\x01%XGLabMappingLib.MapSetup+guided_modes\x02\x00\x00\x00\x06\x06\x06\x02\x00\x00\x00\x00\x00\x01\x06\x03\x00\x00\x00}C:\\Users\\CRONO\\Documents\\Maps - HoeveBlauweKei\\LinkerSchuur\\Optional files - inkttesten\\14200215102021 - blindTest2AgedDetailH\xe1z\x14\xae\xc7+@\x00\x00\x00\x00\x00\x00Y@&amp;\x94\x00\x00\x07\xa6\x00\x00&lt;\x00\x00\x00\x00\x00\x00\x00\x00@\x7f@\x9c\x04\x02\x00\xc9\xb4\x01\x00\x00\xf4\x01\x00\x00\x00F\xc3#\x00\x00\x00\x00\x01\x05\xfc\xff\xff\xff%XGLabMappingLib.MapSetup+guided_modes\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00@333333\xf3?\x00\x00\x00\x00\x00\x00\xf0?\x0b'
+        - SpectraTime: 60
+        - TubekV: 40
+        - TubemA: 250
+        - XSize: 37926
+        - XSpeed: 13.89
+        - XStart: 132252
+        - YSize: 42503
+        - YStart: 111817
+        - YStep: 500.0
+        - ZStart: 46018
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(2778,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00Bxglabhwlib, Version=3.2.4.18, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00"XGLabHWLib.XGLabHWControl+Settings\t\x00\x00\x00\x0cdpp_settings\x10dpp_opt_settings\x10dpp_input_offset\x0cccd_settings\x0fmotors_settings\x0fxrf_calibration\x0fram_calibration\x0cxrf_controls\x1btube_material_atomic_number\x04\x04\x04\x04\x04\x04\x04\x04\x00\x1eXGLabHWLib.DPPLib+DPP_settings\x02\x00\x00\x00\'XGLabHWLib.DPPLib+DPP_optional_settings\x02\x00\x00\x00*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x1eXGLabHWLib.CCDLib+CCD_settings\x02\x00\x00\x00*XGLabHWLib.MotorsLibClasses.MotorsSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00-XGLabHWLib.XGLabHWControl+CalibrationSettings\x02\x00\x00\x00*XGLabHWLib.XGLabHWControl+ControlsSettings\x02\x00\x00\x00\x08\x02\x00\x00\x00\x05\xfd\xff\xff\xff\x1eXGLabHWLib.DPPLib+DPP_settings\x0b\x00\x00\x00\rdetection_thr\npileup_thr\x04gain\x0cpeaking_time\x08flat_top\x11edge_peaking_time\redge_flat_top\x13reset_recovery_time\x0einverted_input\x0ezero_peak_freq\x0bother_param\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0f\x08\x06\x0f\x0f\x0f\x0f\x0f\x01\x06\x0f\x02\x00\x00\x00#\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x08\x00\x00\x00\x07\x00\x00\x00\x07\x00\x00\x00\x01\x00\x00\x00\xe8\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf0?\x00\x00\x00\x00\x05\xfc\xff\xff\xff\'XGLabHWLib.DPPLib+DPP_optional_settings\x07\x00\x00\x00\x06gain_2\x06gain_3\x0epeaking_time_2\x0epeaking_time_3\nflat_top_2\nflat_top_3\x06enable\x00\x00\x00\x00\x00\x00\x00\x06\x06\x0f\x0f\x0f\x0f\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xfb\xff\xff\xff*XGLabHWLib.DPPLib+DPP_configuration_offset\x02\x00\x00\x00\x0boffset_val1\x0boffset_val2\x00\x00\x0f\x0f\x02\x00\x00\x00\x80\x00\x00\x00\x80\x00\x00\x00\x05\xfa\xff\xff\xff\x1eXGLabHWLib.CCDLib+CCD_settings\x04\x00\x00\x00\x08adc_gain\nadc_offset\x0fmax_power_laser\x0cpeltier_temp\x00\x00\x00\x00\x0b\x08\x0f\x08\x02\x00\x00\x00\x00\x00\x80?\n\x00\x00\x00,\x01\x00\x00\xf6\xff\xff\xff\x05\xf9\xff\xff\xff*XGLabHWLib.MotorsLibClasses.MotorsSettings\x03\x00\x00\x00\x07X_motor\x07Y_motor\x07Z_motor\x04\x04\x04)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x02\x00\x00\x00\x05\xf8\xff\xff\xff)XGLabHWLib.MotorsLibClasses.MotorSettings\x02\x00\x00\x00\x07enabled\rconfiguration\x00\x04\x01.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x02\x00\x00\x00\x02\x00\x00\x00\x01\x05\xf7\xff\xff\xff.XGLabHWLib.MotorsLibClasses.MotorConfiguration\x0b\x00\x00\x00\ttype_name\x07address\x04axis\nisLockStep\x04type\x15microsteps_resolution\tmax_speed\x0cacceleration\x0bunits2steps\x06offset\x10maximum_position\x01\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x0f\x0f\x01%XGLabHWLib.MotorsLibClasses.MotorType\x02\x00\x00\x00\x08\x08\x08\x06\x08\x08\x02\x00\x00\x00\x06\n\x00\x00\x00\x16Standard Linear 600 mm\x03\x00\x00\x00\x01\x00\x00\x00\x00\x05\xf5\xff\xff\xff%XGLabHWLib.MotorsLibClasses.MotorType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00*\x95\n\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf4\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xf3\xff\xff\xff\xf7\xff\xff\xff\x06\x0e\x00\x00\x00\x16Standard Linear 450 mm\x01\x00\x00\x00\x01\x00\x00\x00\x01\x01\xf1\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x01\xf0\xff\xff\xff\xf8\xff\xff\xff\x01\x01\xef\xff\xff\xff\xf7\xff\xff\xff\x06\x12\x00\x00\x00\x16Standard Linear 075 mm\x03\x00\x00\x00\x02\x00\x00\x00\x00\x01\xed\xff\xff\xff\xf5\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\xb5Z\r\x00\xe8\x03\x00\x00ffffff\xb9?\x00\x00\x00\x00\x00\x00\x00\x00\x05\xec\xff\xff\xff-XGLabHWLib.XGLabHWControl+CalibrationSettings\t\x00\x00\x00\x0ecalib_p1_count\x0fcalib_p1_energy\x0ecalib_p2_count\x0fcalib_p2_energy\x0ccalib_counts\x0ecalib_energies\x0ecalib_channels\ncalib_mode\x0ecalib_equation\x00\x00\x00\x00\x07\x07\x00\x00\x00\x0b\x0b\x0b\x0b\x0b\x0b\x08\x08\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x15\x00\x00\x00\t\x16\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe9\xff\xff\xff\xec\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\t\x18\x00\x00\x00\t\x19\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xe6\xff\xff\xff*XGLabHWLib.XGLabHWControl+ControlsSettings\x05\x00\x00\x00"limit_factor_single_spectra_enable\x1blimit_factor_mapping_enable\x12limit_factor_alert\x0climit_factor\x12tube_buzzer_enable\x00\x00\x00\x00\x00\x01\x01\x08\x06\x01\x02\x00\x00\x00\x00\x00\x02\x00\x00\x00333333\xc3?\x00-\x00\x00\x00\x0f\x15\x00\x00\x00\x02\x00\x00\x00\x0b\x00\xc0@D\x00\x00\xf4D\x0f\x16\x00\x00\x00\x02\x00\x00\x00\x0bj\xbc\x00A\xd3M\xb1A\x0f\x18\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x00zC\x00\x00\x0cD\x0f\x19\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x80\x8cC\x00\xe0\x87D\x0b''
+
+
+--------------------------------------------------------------------------------
+[3] /CreatedDateTime:
+
++ATTRIBUTES: (none)
+
++SHAPE: (50,) DTYPE: '|S1'
+
++VALUES: 
+'10/15/2021 14:20:02'
+
+
+--------------------------------------------------------------------------------
+[4] /CreatedWithSoftwareVersion:
+
++ATTRIBUTES: (none)
+
++SHAPE: (50,) DTYPE: '|S1'
+
++VALUES: 
+'CRONO 1.2.4.54'
+
+
+--------------------------------------------------------------------------------
+[5] /FileStructureVersion:
+
++ATTRIBUTES: (none)
+
++SHAPE: (2,) DTYPE: 'int32'
+
++VALUES: 
+'array([1, 6], dtype=int32)'
+
+
+--------------------------------------------------------------------------------
+[6] /Images/Documentation:
+
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(0,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'''
+
+
+--------------------------------------------------------------------------------
+[7] /Images/ImageAdjusting/ImagePixelSizeRatio:
+
++ATTRIBUTES: (none)
+
++SHAPE: (1, 2) DTYPE: 'float32'
+
++VALUES: 
+'array([[11.085714, 11.085714]], dtype=float32)'
+
+
+--------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[8] /Images/Static:
+
++ATTRIBUTES: (none)
+
++SHAPE: (13358,) DTYPE: 'object' SUBSHAPES: [(0,), (2565,), (2572,), (2525,), '....'] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'''
+
+
+--------------------------------------------------------------------------------
+[9] /Images/StitchedImage:
+
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(0,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'''
+
+
+--------------------------------------------------------------------------------
+[10] /Images/VideoStreams:
+
++ATTRIBUTES: (none)
+
++SHAPE: (1,) DTYPE: 'object' SUBSHAPES: [(0,)] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'''
+
+
+--------------------------------------------------------------------------------
+[11] /XRF/CalibrationPoints:
+
++ATTRIBUTES: 
+        - CalibrationBins: 4096
+        - CalibrationEquation: 0
+
++SHAPE: (2, 2) DTYPE: 'float32'
+
++VALUES: 
+'array([[ 771.   ,    8.046],
+       [1952.   ,   22.163]], dtype=float32)'
+
+
+--------------------------------------------------------------------------------
+[12] /XRF/DPPStartTimestamp:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint64'
+
++VALUES: 
+'array([125903380430, 125903380430, 125903380430, ..., 125903380430,
+       125903380430, 125903380430], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[13] /XRF/Detected:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint32'
+
++VALUES: 
+'array([515, 578, 567, ..., 635, 603, 622], dtype=uint32)'
+
+
+--------------------------------------------------------------------------------
+[14] /XRF/EnergyVector:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4096,) DTYPE: 'float32'
+
++VALUES: 
+'array([-1.1700948, -1.1581414, -1.146188 , ..., 47.755295 , 47.767246 ,
+       47.7792   ], dtype=float32)'
+
+
+--------------------------------------------------------------------------------
+[15] /XRF/LiveTimes:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint64'
+
++VALUES: 
+'array([59436, 59356, 59368, ..., 59300, 59336, 59316], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[16] /XRF/Maps/ComputedMaps:
+
++ATTRIBUTES: (none)
+
++SHAPE: (85, 37, 27) DTYPE: 'float64'
+
++VALUES: 
+'array([[[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       ...,
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]]])'
+
+
+--------------------------------------------------------------------------------
+[17] /XRF/MotorsPositions:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284, 3) DTYPE: 'uint32'
+
++VALUES: 
+'array([[132252, 111816,  46018],
+       [132252, 111816,  46018],
+       [132273, 111816,  46018],
+       ...,
+       [169155, 153817,  46018],
+       [169832, 153817,  46018],
+       [170151, 153817,  46018]], dtype=uint32)'
+
+
+--------------------------------------------------------------------------------
+[18] /XRF/MotorsPositionsStats:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint8'
+
++VALUES: 
+'array([1, 1, 1, ..., 1, 1, 1], dtype=uint8)'
+
+
+--------------------------------------------------------------------------------
+[19] /XRF/MotorsTimestamps:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284, 3) DTYPE: 'uint64'
+
++VALUES: 
+'array([[ 8479, 11082, 13794],
+       [ 8479, 11082, 13794],
+       [ 8480, 11079, 13791],
+       ...,
+       [ 8597, 11195, 13809],
+       [ 8594, 11195, 13809],
+       [ 8596, 11199, 13810]], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[20] /XRF/OutputCountRates:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'float64'
+
++VALUES: 
+'array([ 9.38333333, 10.31666667, 10.15      , ..., 11.25      ,
+       10.76666667, 11.11666667])'
+
+
+--------------------------------------------------------------------------------
+[21] /XRF/ROIs/ROIsEnergies:
+
++ATTRIBUTES: (none)
+
++SHAPE: (27, 2) DTYPE: 'float64'
+
++VALUES: 
+'array([[ 1.6389612 ,  1.88998318],
+       [ 2.18881893,  2.39202714],
+       [ 3.51564956,  3.85034561],
+       [ 4.29262257,  4.65122557],
+       [ 5.05764198,  5.30866432],
+       [ 5.30866432,  5.61945343],
+       [ 5.69117403,  6.04977655],
+       [ 6.16931105,  6.611588  ],
+       [ 6.77893591,  7.24511957],
+       [ 7.54920769,  7.54920769],
+       [ 8.36874199,  8.87078571],
+       [10.35301113, 10.81919479],
+       [12.4209547 , 12.86323166],
+       [13.90318012, 14.45303822],
+       [18.20641518, 19.48980331],
+       [ 3.1809535 ,  3.4678359 ],
+       [11.7412138 , 12.09821224],
+       [ 9.80000019, 10.10000038],
+       [11.01045036, 11.46468067],
+       [22.85629845, 23.54959869],
+       [16.92739868, 17.57288361],
+       [14.58452606, 14.95508194],
+       [19.83208084, 20.5731945 ],
+       [ 1.86607635,  2.12905169],
+       [ 7.31684017,  7.65153646],
+       [ 8.9664135 ,  9.43259716],
+       [24.81232262, 25.71306229]])'
+
+
+--------------------------------------------------------------------------------
+[22] /XRF/ROIs/ROIsNames:
+
++ATTRIBUTES: (none)
+
++SHAPE: (27,) DTYPE: 'object' SUBSHAPES: [(4,), (3,), (4,), (8,), '....'] SUB_DTYPE: '|S1'
+
++VALUES: 
+'SiKa
+SKa
+CaKa
+TiKaBaLa
+BaLg
+CrKaBaLl
+MnKa
+FeKa
+FeKbCoKa
+CuKa
+ZnKa
+PbLa
+PbLb
+SrKa
+Compton
+KKa
+AsKb
+HgLa
+SeKa
+CdKa
+New ROI (1)
+New ROI (2)
+RhKa
+PKa
+NiKa
+New ROI (3)
+SnKa'
+
+
+--------------------------------------------------------------------------------
+[23] /XRF/ROIs/ROIsObjects:
+
++ATTRIBUTES: (none)
+
++SHAPE: (27,) DTYPE: 'object' SUBSHAPES: [(2138,), (2136,), (2138,), (2142,), '....'] SUB_DTYPE: '|V1'
+
++VALUES: 
+'b'\x00\x01\x00\x00\x00\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x0c\x02\x00\x00\x00GXGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null\x05\x01\x00\x00\x00$XGLabMappingLib.ObservableROIWrapper\x01\x00\x00\x00\x04_roi\x04\x13XGLabMappingLib.ROI\x02\x00\x00\x00\x02\x00\x00\x00\t\x03\x00\x00\x00\x05\x03\x00\x00\x00\x13XGLabMappingLib.ROI\x08\x00\x00\x00\x15&lt;name&gt;k__BackingField\x18&lt;element&gt;k__BackingField\x1b&lt;definition&gt;k__BackingField\x15&lt;type&gt;k__BackingField\x16&lt;start&gt;k__BackingField\x14&lt;end&gt;k__BackingField\x18&lt;palette&gt;k__BackingField\x19&lt;editable&gt;k__BackingField\x01\x01\x04\x04\x00\x00\x04\x00\x1dXGLabMappingLib.ROIDefinition\x02\x00\x00\x00\x1fXGLabMappingLib.ROIAnalysisType\x02\x00\x00\x00\x05\x05\x17XGLabMappingLib.Palette\x02\x00\x00\x00\x01\x02\x00\x00\x00\x06\x04\x00\x00\x00\x04SiKa\x06\x05\x00\x00\x00\x00\x05\xfa\xff\xff\xff\x1dXGLabMappingLib.ROIDefinition\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x00\x00\x00\x00\x05\xf9\xff\xff\xff\x1fXGLabMappingLib.ROIAnalysisType\x01\x00\x00\x00\x07value__\x00\x08\x02\x00\x00\x00\x02\x00\x00\x00\x101.63896119594574\x101.88998317718506\t\x08\x00\x00\x00\x01\x05\x08\x00\x00\x00\x17XGLabMappingLib.Palette\x03\x00\x00\x00\x0b_colorSteps\x1b&lt;autoMaxMin&gt;k__BackingField\x17&lt;smooth&gt;k__BackingField\x04\x00\x00\x1cXGLabMappingLib.PaletteSteps\x02\x00\x00\x00\x01\x01\x02\x00\x00\x00\t\t\x00\x00\x00\x01\x01\x05\t\x00\x00\x00\x1cXGLabMappingLib.PaletteSteps\x01\x00\x00\x00\x06_steps\x03\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x02\x00\x00\x00\t\n\x00\x00\x00\x04\n\x00\x00\x00\x89\x01System.Collections.Generic.List`1[[XGLabMappingLib.PaletteStep, XGLabMappingLib, Version=1.2.4.45, Culture=neutral, PublicKeyToken=null]]\x03\x00\x00\x00\x06_items\x05_size\x08_version\x04\x00\x00\x1dXGLabMappingLib.PaletteStep[]\x02\x00\x00\x00\x08\x08\t\x0b\x00\x00\x00\t\x00\x00\x00\t\x00\x00\x00\x07\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x10\x00\x00\x00\x04\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x0c\r\x00\x00\x00QSystem.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\x05\xf4\xff\xff\xff\x1bXGLabMappingLib.PaletteStep\x02\x00\x00\x00\x05value\x05color\x00\x04\x06\x14System.Drawing.Color\r\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\xf2\xff\xff\xff\x14System.Drawing.Color\x04\x00\x00\x00\x04name\x05value\nknownColor\x05state\x01\x00\x00\x00\t\x07\x07\r\x00\x00\x00\n@\x00@\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xf1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@o@\x01\xf0\xff\xff\xff\xf2\xff\xff\xff\n\x80\x00\x80\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xef\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x7f@\x01\xee\xff\xff\xff\xf2\xff\xff\xff\n\xeeh{\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xed\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x87@\x01\xec\xff\xff\xff\xf2\xff\xff\xff\n\xed\x95d\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xeb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x8f@\x01\xea\xff\xff\xff\xf2\xff\xff\xff\n2\xcd2\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x88\x93@\x01\xe8\xff\xff\xff\xf2\xff\xff\xff\n\x90\xee\x90\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00p\x97@\x01\xe6\xff\xff\xff\xf2\xff\xff\xff\n\x00\xff\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00X\x9b@\x01\xe4\xff\xff\xff\xf2\xff\xff\xff\n\x00\xa5\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe3\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00@\x9f@\x01\xe2\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x02\x00\x01\xe1\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xe0\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdf\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xde\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdd\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdc\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xdb\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xda\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd9\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd8\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd7\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd6\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd5\xff\xff\xff\xf4\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x01\xd4\xff\xff\xff\xf2\xff\xff\xff\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0b''
+
+
+--------------------------------------------------------------------------------
+[24] /XRF/RealTimes:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint64'
+
++VALUES: 
+'array([60000, 60000, 60000, ..., 60000, 60000, 60000], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[25] /XRF/ResetCounterValue:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint32'
+
++VALUES: 
+'array([ 9, 11, 11, ..., 11, 11, 11], dtype=uint32)'
+
+
+--------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[26] /XRF/Spectra:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284, 4096) DTYPE: 'uint16'
+
++VALUES: 
+'array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint16)'
+
+
+--------------------------------------------------------------------------------
+[27] /XRF/SpectraIDs:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint16'
+
++VALUES: 
+'array([20518, 20519, 20520, ..., 27568, 27569, 27570], dtype=uint16)'
+
+
+--------------------------------------------------------------------------------
+[28] /XRF/SpectraSelectedIndex:
+
++ATTRIBUTES: (none)
+
++SHAPE: (85, 37, 1) DTYPE: 'uint64'
+
++VALUES: 
+'array([[[   4],
+        [   5],
+        [   6],
+        ...,
+        [  44],
+        [  45],
+        [  47]],
+
+       [[  97],
+        [  96],
+        [  95],
+        ...,
+        [  56],
+        [  55],
+        [  54]],
+
+       [[ 104],
+        [ 106],
+        [ 107],
+        ...,
+        [ 145],
+        [ 146],
+        [ 147]],
+
+       ...,
+
+       [[4136],
+        [4138],
+        [4139],
+        ...,
+        [4177],
+        [4178],
+        [4180]],
+
+       [[4230],
+        [4228],
+        [4227],
+        ...,
+        [4189],
+        [4187],
+        [4186]],
+
+       [[4237],
+        [4239],
+        [4240],
+        ...,
+        [4278],
+        [4279],
+        [4281]]], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[29] /XRF/Timestamps:
+
++ATTRIBUTES: (none)
+
++SHAPE: (4284,) DTYPE: 'uint64'
+
++VALUES: 
+'array([ 14880000,  14940000,  15000000, ..., 437880000, 437940000,
+       438000000], dtype=uint64)'
+
+
+--------------------------------------------------------------------------------
+[30] /XRF/XComputedMapsCoordinate:
+
++ATTRIBUTES: (none)
+
++SHAPE: (85, 37, 1) DTYPE: 'float64'
+
++VALUES: 
+'array([[[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       ...,
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]]])'
+
+
+--------------------------------------------------------------------------------
+[31] /XRF/YComputedMapsCoordinate:
+
++ATTRIBUTES: (none)
+
++SHAPE: (85, 37, 1) DTYPE: 'float64'
+
++VALUES: 
+'array([[[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       ...,
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]],
+
+       [[nan],
+        [nan],
+        [nan],
+        ...,
+        [nan],
+        [nan],
+        [nan]]])'
+
+</code></pre>
+</div>
+</div>
+<section id="api" class="level1">
+<h1>API</h1>
+<hr>
+<p><a href="https://github.com/fligt/cronomaxrf/blob/main/cronomaxrf/crono.py#L49" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="peek_inside" class="level3">
+<h3 class="anchored" data-anchor-id="peek_inside">peek_inside</h3>
+<blockquote class="blockquote">
+<pre><code> peek_inside (dataset, _print=True)</code></pre>
+</blockquote>
+<p>Summarize structure and content of a <code>dataset</code>.</p>
+<hr>
+<p><a href="https://github.com/fligt/cronomaxrf/blob/main/cronomaxrf/crono.py#L23" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="report" class="level3">
+<h3 class="anchored" data-anchor-id="report">report</h3>
+<blockquote class="blockquote">
+<pre><code> report (crono_filename)</code></pre>
+</blockquote>
+<p>Print info about structure and content of datasets in <code>crono_filename</code>.</p>
+<hr>
+<p><a href="https://github.com/fligt/cronomaxrf/blob/main/cronomaxrf/crono.py#L10" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="read_datasets" class="level3">
+<h3 class="anchored" data-anchor-id="read_datasets">read_datasets</h3>
+<blockquote class="blockquote">
+<pre><code> read_datasets (crono_filename)</code></pre>
+</blockquote>
+<p>Read all datasets in <code>crono_filename</code>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./download-demo-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Download demo data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./gridify-by-selection.html" class="pagination-link">
+        <span class="nav-page-text">Gridify by selection</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">2023 Rijkserfgoedlaboratorium Amsterdam</div>
+  </div>
+</footer>
+
+
+
+</body></html>
